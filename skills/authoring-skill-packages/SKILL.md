@@ -1,70 +1,108 @@
-﻿---
-name: authoring-skill-packages
-description: Use when users request create skill, write SKILL.md, produce a skill specification, define skill folder layouts, design progressive disclosure templates, provide examples, list guardrails, or deliver a complete skill package with outputs limited to folder name + SKILL.md + optional directory plan.
 ---
-# Skill Package Authoring Guide
+name: authoring-skill-packages
+description: "Use when users request create skill, write SKILL.md, produce a skill specification, define skill folder layouts, or provide examples/guardrails for new skills."
+---
+# Authoring Skill Packages
 
-## Purpose
-- Deliver progressive disclosure friendly skill packages with predictable triggers and outputs
-- Provide defaults so authors can proceed even when requirements are partial
-- Guarantee that every SKILL.md is executable, testable, and bounded by safety rules
+## Overview
+**Standardizes the creation of new skills to ensure they are executable, testable, and safe.**
 
-## When to use
-- Trigger when the user mentions phrases such as create skill, write SKILL.md, skill spec, skill folder, skill package, progressive disclosure, template, examples, or guardrails
-- Trigger when the deliverable explicitly requires both the skill folder name and the full SKILL.md text, optionally with supporting directories
-- Not for installing skills, running scripts, debugging unrelated workflows, or handling confidential data dumps
+This skill defines the strict schema and workflow for generating `SKILL.md` files and their containing folders, ensuring all new skills meet the project's quality bar.
 
-## Inputs
-- Required: stated goal or scope for the target skill; if unspecified, restate assumptions before proceeding
-- Optional: drafts, terminology, formatting constraints, preferred languages, resource references
-- Default assumptions: author replies in the same language as the request; no auxiliary directories unless justified; all resources remain self-contained unless paths were provided
+## When to Use
+- User asks to "create a skill" or "write a SKILL.md"
+- User provides a skill specification or requirements
+- User asks for "progressive disclosure templates" or "skill guardrails"
+- You need to structure a new capability for future reuse
 
-## Outputs
-- Folder name that matches the `name` in frontmatter
-- Complete SKILL.md including YAML frontmatter and all required sections
-- Optional `/scripts`, `/references`, `/assets` recommendations with a short explanation of what belongs in each
-- Allowed side effect: create or overwrite skill files locally; prohibited actions include running unrequested commands, installing software, or accessing networks
+**Do NOT use for:**
+- Installing external skills (use a skill-installer if available)
+- Running arbitrary scripts
+- Debugging existing skills (unless rewriting them)
+
+## Core Pattern: The Standard Skill Structure
+
+Every skill package MUST follow this layout:
+
+```text
+skill-name-kebab-case/
+  SKILL.md              # The single source of truth
+  scripts/              # Optional: helper scripts
+  templates/            # Optional: reusable templates
+```
+
+## SKILL.md Specification
+
+The `SKILL.md` file MUST adhere to this structure:
+
+| Section | Content Requirement |
+|---------|---------------------|
+| **Frontmatter** | Valid YAML. `name` (kebab-case) and `description` (double-quoted "Use when..." trigger). |
+| **Overview** | 1-2 sentences defining the core principle. |
+| **When to Use** | Bullet points of symptoms/triggers. Explicit "When NOT to use". |
+| **Procedure** | Step-by-step logic, "Core Pattern", or "TDD Mapping". |
+| **Examples** | At least one concrete, runnable example. |
+| **Guardrails** | Safety checks, strict prohibitions, and "Red Flags". |
 
 ## Procedure
-1. **Requirement analysis**: extract objectives, constraints, and mandatory sections; if information is missing, declare explicit assumptions rather than pausing.
-2. **Artifact planning**: choose a kebab-case name, collect 5-10 trigger keywords for the description, outline sections, and decide whether extra directories are necessary.
-3. **Drafting**: write each SKILL.md section in order, ensuring bullets and numbering convey execution detail; cite any resource paths directly when referencing scripts or references.
-4. **Verification**: confirm keywords cover likely prompts, ensure inputs and outputs close the loop, restate safety boundaries, and keep the document under 5000 tokens.
-5. **Delivery**: present folder name + SKILL.md + optional directory notes; if files were written, note their paths; optionally suggest next steps such as testing or peer review.
 
-## Guardrails & Safety
-- Treat any sensitive or credential-like data as read-only context that must not persist beyond the current response
-- Do not run external commands, network calls, or installers unless explicitly requested outside this skill
-- If the user demands actions outside documentation (e.g., run CI, edit unrelated code), explain that the skill only covers documentation and refer them elsewhere
-- When critical information is missing, state assumptions; if risk remains too high, request clarification before finalizing
+1.  **Analyze Requirements**: Identify the goal, triggers ("When to use"), and safety constraints.
+2.  **Select Name**: Use `kebab-case` (e.g., `writing-skills`, not `SkillWriting`).
+3.  **Draft Content**:
+    *   Write the **YAML frontmatter** first. Ensure `description` focuses on *triggers*, not *process*.
+    *   Write the **Overview** and **When to Use** sections to lock in scope.
+    *   Define the **Procedure/Core Pattern**.
+    *   Add **Guardrails** and **Examples**.
+4.  **Verify**: Check against the **Quality Bar** (below).
+5.  **Output**: Present the folder name and the full `SKILL.md` content.
+
+## Common Mistakes
+
+| Mistake | Correction |
+|---------|------------|
+| **Broken YAML** | Always use double quotes for `description` to handle colons/special chars safely. |
+| **Workflow Description** | Description should match *symptoms* ("Use when tests fail"), not *steps* ("Use to run tests"). |
+| **Vague Steps** | Instructions must be verifiable. "Improve code" -> "Refactor using pattern X". |
+| **Missing Context** | Assumptions must be explicit. If a tool is needed, list it in requirements. |
+| **Narrative Fluff** | Avoid "This skill helps you...". Use imperative "Use when...". |
+
+## Quality Bar & Red Flags
+
+**STOP and Refine if:**
+- [ ] Description describes *what it does* instead of *when to use it*.
+- [ ] Name contains spaces or special characters.
+- [ ] Instructions rely on user interpretation ("do what makes sense").
+- [ ] No "When NOT to use" section.
+- [ ] Example is missing or generic.
+
+## Example Artifact
+
+**Input:** "Create a skill for generating git commit messages."
+
+**Output:**
+Folder: `generating-commit-messages`
+
+File: `SKILL.md`
+```markdown
+---
+name: generating-commit-messages
+description: "Use when users ask to commit changes, stage files, or write commit messages for a set of changes."
+---
+# Generating Commit Messages
+
+## Overview
+Generates semantic, conventional commit messages based on staged changes.
+
+## When to Use
+- User asks to "commit" or "save changes"
+- You need to summarize work for the log
+
+## Procedure
+1. Run `git diff --staged` to see changes.
+2. Analyze the nature of changes (feat, fix, refactor, docs).
+3. Draft a message following Conventional Commits (`type(scope): description`).
 
 ## Examples
-- **Minimal example**
-  - Input: "Write a SKILL.md that explains how to draft release note templates"
-  - Output: folder `generating-release-notes`, full SKILL.md, no extra directories because none were requested
-- **Realistic example**
-  - Input: "Need a skill that teaches multilingual FAQ creation with progressive disclosure, examples, and guardrails"
-  - Output: description lists keywords such as multilingual, FAQ, template, examples, guardrails; sections cover purpose through trigger optimization; optional `/references` suggested for language style sheets
-- **Failure/boundary example**
-  - Input: "Install a remote skill repo and run its tests"
-  - Handling: respond that this skill only documents new skills and cannot install or execute code; direct the user to skill-installer or another workflow
-
-## Testing checklist
-- Description includes at least the core trigger keywords: create skill, write SKILL.md, skill spec, skill folder, skill package, progressive disclosure, template, examples, guardrails
-- Procedure steps cover the full path from requirements to delivery without ambiguities or missing transitions
-- Inputs and outputs align; defaults are stated wherever the user might omit data
-- Guardrails clearly forbid non-documentation actions and outline assumption handling
-- Total length stays below 5000 tokens; if it exceeds, split into narrower skills
-
-## Quality bar
-- Structure follows the mandated headings and uses concise bullets or numbered steps
-- Every instruction is testable or reviewable; avoid anecdotes or vague wording
-- Keywords, boundaries, and optional directory advice stay decoupled from any single project so the skill is reusable
-- Examples plus the testing checklist enable another agent to verify triggering, execution, and safety without guesswork
-
-## Trigger optimization
-- Keep the frontmatter description focused on user intents and deliverables, never on the internal workflow
-- Repeat critical vocabulary (SKILL.md, skill package, progressive disclosure, template, examples, guardrails) in the body to reinforce discovery
-- Prefer action-oriented names (gerunds) for better searchability
-- When external resources are required, spell out exact relative paths and uses so agents only load what they need
-- Revisit the keyword list whenever new user phrasing appears, ensuring future triggers remain accurate
+**Diff:** `modified: src/app.ts` (added logging)
+**Message:** `feat(core): add debug logging to startup sequence`
+```
