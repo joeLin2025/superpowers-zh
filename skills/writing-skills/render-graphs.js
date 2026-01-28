@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
 /**
- * Render graphviz diagrams from a skill's SKILL.md to SVG files.
+ * 将技能的 SKILL.md 中的 graphviz 图表渲染为 SVG 文件。
  *
- * Usage:
- *   ./render-graphs.js <skill-directory>           # Render each diagram separately
- *   ./render-graphs.js <skill-directory> --combine # Combine all into one diagram
+ * 用法:
+ *   ./render-graphs.js <skill-directory>           # 分别渲染每个图表
+ *   ./render-graphs.js <skill-directory> --combine # 将所有图表合并为一个
  *
- * Extracts all ```dot blocks from SKILL.md and renders to SVG.
- * Useful for helping your human partner visualize the process flows.
+ * 从 SKILL.md 中提取所有 ```dot 块并渲染为 SVG。
+ * 有助于帮助你的人类伙伴可视化流程。
  *
- * Requires: graphviz (dot) installed on system
+ * 要求: 系统上安装了 graphviz (dot)
  */
 
 const fs = require('fs');
@@ -25,7 +25,7 @@ function extractDotBlocks(markdown) {
   while ((match = regex.exec(markdown)) !== null) {
     const content = match[1].trim();
 
-    // Extract digraph name
+    // 提取 digraph 名称
     const nameMatch = content.match(/digraph\s+(\w+)/);
     const name = nameMatch ? nameMatch[1] : `graph_${blocks.length + 1}`;
 
@@ -36,13 +36,13 @@ function extractDotBlocks(markdown) {
 }
 
 function extractGraphBody(dotContent) {
-  // Extract just the body (nodes and edges) from a digraph
-  const match = dotContent.match(/digraph\s+\w+\s*\{([\s\S]*)\}/);
+  // 仅从 digraph 中提取主体（节点和边缘）
+  const match = dotContent.match(/digraph\s+\w+\s*{\s*([\s\S]*)\s*}/);
   if (!match) return '';
 
   let body = match[1];
 
-  // Remove rankdir (we'll set it once at the top level)
+  // 移除 rankdir（我们将在顶层设置一次）
   body = body.replace(/^\s*rankdir\s*=\s*\w+\s*;?\s*$/gm, '');
 
   return body.trim();
@@ -51,7 +51,7 @@ function extractGraphBody(dotContent) {
 function combineGraphs(blocks, skillName) {
   const bodies = blocks.map((block, i) => {
     const body = extractGraphBody(block.content);
-    // Wrap each subgraph in a cluster for visual grouping
+    // 将每个子图包装在一个 cluster 中以进行视觉分组
     return `  subgraph cluster_${i} {
     label="${block.name}";
     ${body.split('\n').map(line => '  ' + line).join('\n')}
@@ -107,7 +107,7 @@ function main() {
     process.exit(1);
   }
 
-  // Check if dot is available
+  // 检查 dot 是否可用
   try {
     execSync('which dot', { encoding: 'utf-8' });
   } catch {
@@ -133,7 +133,7 @@ function main() {
   }
 
   if (combine) {
-    // Combine all graphs into one
+    // 将所有图表合并为一个
     const combined = combineGraphs(blocks, skillName);
     const svg = renderToSvg(combined);
     if (svg) {
@@ -141,7 +141,7 @@ function main() {
       fs.writeFileSync(outputPath, svg);
       console.log(`  Rendered: ${skillName}_combined.svg`);
 
-      // Also write the dot source for debugging
+      // 同时也写入 dot 源码用于调试
       const dotPath = path.join(outputDir, `${skillName}_combined.dot`);
       fs.writeFileSync(dotPath, combined);
       console.log(`  Source: ${skillName}_combined.dot`);
@@ -149,7 +149,7 @@ function main() {
       console.error('  Failed to render combined diagram');
     }
   } else {
-    // Render each separately
+    // 分别渲染每个
     for (const block of blocks) {
       const svg = renderToSvg(block.content);
       if (svg) {
@@ -162,7 +162,8 @@ function main() {
     }
   }
 
-  console.log(`\nOutput: ${outputDir}/`);
+  console.log(`\nOutput: ${outputDir}/
+`);
 }
 
 main();
