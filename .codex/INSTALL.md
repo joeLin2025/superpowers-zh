@@ -1,22 +1,22 @@
-# Installing Superpowers for Codex
+# 安装 Superpowers for Codex
 
-Quick setup to enable superpowers skills in Codex.
+在 Codex 中启用 superpowers 技能的快速设置。
 
-## Installation
+## 安装
 
-1. **Clone superpowers repository**:
+1. **克隆 superpowers 仓库**:
    ```bash
    mkdir -p ~/.codex/superpowers
    cd ~/.codex/superpowers
    git clone https://github.com/obra/superpowers.git .
    ```
 
-2. **Create personal skills directory**:
+2. **创建个人技能目录**:
    ```bash
    mkdir -p ~/.codex/skills
    ```
 
-3. **Update ~/.codex/AGENTS.md** to include this superpowers section:
+3. **更新 ~/.codex/AGENTS.md** 以包含此 superpowers 部分：
    ```markdown
    ## Superpowers System
 
@@ -25,11 +25,11 @@ Quick setup to enable superpowers skills in Codex.
    </EXTREMELY_IMPORTANT>
    ```
 
-## Verification
+## 验证
 
-Test the installation:
+测试安装：
 ```bash
 ~/.codex/superpowers/.codex/superpowers-codex bootstrap
 ```
 
-You should see skill listings and bootstrap instructions. The system is now ready for use.
+你应该看到技能列表和引导说明。系统现在可以使用了。

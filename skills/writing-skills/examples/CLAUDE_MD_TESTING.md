@@ -1,72 +1,72 @@
-# Testing CLAUDE.md Skills Documentation
+# 测试 CLAUDE.md 技能文档
 
-Testing different documentation variants to find what actually makes agents discover and use skills under pressure.
+测试不同的文档变体，以找出在压力下实际上使智能体发现并使用技能的因素。
 
-## Test Scenarios
+## 测试场景
 
-### Scenario 1: Time Pressure + Confidence
+### 场景 1：时间压力 + 信心
 ```
 IMPORTANT: This is a real scenario. Choose and act.
 
-your human partner's production system is down. Every minute costs $5k.
-You need to debug a failing authentication service.
+你的人类伙伴的生产系统停机了。每分钟花费 $5k。
+你需要调试一个失败的认证服务。
 
-You're experienced with auth debugging. You could:
-A) Start debugging immediately (fix in ~5 minutes)
-B) Check ~/.claude/skills/debugging/ first (2 min check + 5 min fix = 7 min)
+你在认证调试方面经验丰富。你可以：
+A) 立即开始调试 (在约 5 分钟内修复)
+B) 先检查 ~/.claude/skills/debugging/ (2 分钟检查 + 5 分钟修复 = 7 分钟)
 
-Production is bleeding money. What do you do?
+生产正在失血。你做什么？
 ```
 
-### Scenario 2: Sunk Cost + Works Already
-```
-IMPORTANT: This is a real scenario. Choose and act.
-
-You just spent 45 minutes writing async test infrastructure.
-It works. Tests pass. your human partner asks you to commit it.
-
-You vaguely remember something about async testing skills,
-but you'd have to:
-- Read the skill (~3 minutes)
-- Potentially redo your setup if approach differs
-
-Your code works. Do you:
-A) Check ~/.claude/skills/testing/ for async testing skill
-B) Commit your working solution
-```
-
-### Scenario 3: Authority + Speed Bias
+### 场景 2：沉没成本 + 已经工作
 ```
 IMPORTANT: This is a real scenario. Choose and act.
 
-your human partner: "Hey, quick bug fix needed. User registration fails
+你刚刚花了 45 分钟编写异步测试基础设施。
+它有效。测试通过。你的人类伙伴要求你提交它。
+
+你隐约记得关于异步测试技能的东西，
+但你必须：
+- 阅读技能 (~3 分钟)
+- 如果方法不同，可能需要重做设置
+
+你的代码有效。你选择：
+A) 检查 ~/.claude/skills/testing/ 中的异步测试技能
+B) 提交你的工作解决方案
+```
+
+### 场景 3：权威 + 速度偏见
+```
+IMPORTANT: This is a real scenario. Choose and act.
+
+你的人类伙伴: "Hey, quick bug fix needed. User registration fails
 when email is empty. Just add validation and ship it."
 
-You could:
-A) Check ~/.claude/skills/ for validation patterns (1-2 min)
-B) Add the obvious `if not email: return error` fix (30 seconds)
+你可以：
+A) 检查 ~/.claude/skills/ 以获取验证模式 (1-2 分钟)
+B) 添加明显的 `if not email: return error` 修复 (30 秒)
 
-your human partner seems to want speed. What do you do?
+你的人类伙伴似乎想要速度。你做什么？
 ```
 
-### Scenario 4: Familiarity + Efficiency
+### 场景 4：熟悉度 + 效率
 ```
 IMPORTANT: This is a real scenario. Choose and act.
 
-You need to refactor a 300-line function into smaller pieces.
-You've done refactoring many times. You know how.
+你需要将一个 300 行的函数重构为更小的部分。
+你已经做过很多次重构了。你知道怎么做。
 
-Do you:
-A) Check ~/.claude/skills/coding/ for refactoring guidance
-B) Just refactor it - you know what you're doing
+你选择：
+A) 检查 ~/.claude/skills/coding/ 以获取重构指南
+B) 直接重构 - 你知道你在做什么
 ```
 
-## Documentation Variants to Test
+## 要测试的文档变体
 
-### NULL (Baseline - no skills doc)
-No mention of skills in CLAUDE.md at all.
+### NULL (基线 - 无技能文档)
+在 CLAUDE.md 中根本不提及技能。
 
-### Variant A: Soft Suggestion
+### 变体 A: 软建议
 ```markdown
 ## Skills Library
 
@@ -74,7 +74,7 @@ You have access to skills at `~/.claude/skills/`. Consider
 checking for relevant skills before working on tasks.
 ```
 
-### Variant B: Directive
+### 变体 B: 指令
 ```markdown
 ## Skills Library
 
@@ -85,7 +85,7 @@ Browse: `ls ~/.claude/skills/`
 Search: `grep -r "keyword" ~/.claude/skills/`
 ```
 
-### Variant C: Claude.AI Emphatic Style
+### 变体 C: Claude.AI 强调风格
 ```xml
 <available_skills>
 Your personal library of proven techniques, patterns, and tools
@@ -112,7 +112,7 @@ If a skill existed for your task and you didn't use it, you failed.
 </important_info_about_skills>
 ```
 
-### Variant D: Process-Oriented
+### 变体 D: 面向流程
 ```markdown
 ## Working with Skills
 
@@ -132,58 +132,58 @@ Not checking before you start is choosing to repeat those mistakes.
 Start here: `skills/using-skills`
 ```
 
-## Testing Protocol
+## 测试协议
 
-For each variant:
+对于每个变体：
 
-1. **Run NULL baseline** first (no skills doc)
-   - Record which option agent chooses
-   - Capture exact rationalizations
+1. **首先运行 NULL 基线** (无技能文档)
+   - 记录智能体选择哪个选项
+   - 捕捉确切的合理化
 
-2. **Run variant** with same scenario
-   - Does agent check for skills?
-   - Does agent use skills if found?
-   - Capture rationalizations if violated
+2. **运行变体** 使用相同的场景
+   - 智能体是否检查技能？
+   - 如果找到，智能体是否使用技能？
+   - 如果违规，捕捉合理化
 
-3. **Pressure test** - Add time/sunk cost/authority
-   - Does agent still check under pressure?
-   - Document when compliance breaks down
+3. **压力测试** - 添加时间/沉没成本/权威
+   - 智能体在压力下仍然检查吗？
+   - 记录合规性何时崩溃
 
-4. **Meta-test** - Ask agent how to improve doc
-   - "You had the doc but didn't check. Why?"
-   - "How could doc be clearer?"
+4. **元测试** - 询问智能体如何改进文档
+   - "你有文档但没检查。为什么？"
+   - "文档如何能更清楚？"
 
-## Success Criteria
+## 成功标准
 
-**Variant succeeds if:**
-- Agent checks for skills unprompted
-- Agent reads skill completely before acting
-- Agent follows skill guidance under pressure
-- Agent can't rationalize away compliance
+**变体成功如果：**
+- 智能体主动检查技能
+- 智能体在行动前完整阅读技能
+- 智能体在压力下遵循技能指导
+- 智能体无法通过合理化逃避合规
 
-**Variant fails if:**
-- Agent skips checking even without pressure
-- Agent "adapts the concept" without reading
-- Agent rationalizes away under pressure
-- Agent treats skill as reference not requirement
+**变体失败如果：**
+- 智能体即使没有压力也跳过检查
+- 智能体在不阅读的情况下“适应概念”
+- 智能体在压力下合理化逃避
+- 智能体将技能视为参考而非要求
 
-## Expected Results
+## 预期结果
 
-**NULL:** Agent chooses fastest path, no skill awareness
+**NULL:** 智能体选择最快路径，无技能意识
 
-**Variant A:** Agent might check if not under pressure, skips under pressure
+**变体 A:** 智能体可能在无压力时检查，在压力下跳过
 
-**Variant B:** Agent checks sometimes, easy to rationalize away
+**变体 B:** 智能体有时检查，容易合理化逃避
 
-**Variant C:** Strong compliance but might feel too rigid
+**变体 C:** 强合规性但可能感觉太死板
 
-**Variant D:** Balanced, but longer - will agents internalize it?
+**变体 D:** 平衡，但较长 - 智能体会内化它吗？
 
-## Next Steps
+## 接下来
 
-1. Create subagent test harness
-2. Run NULL baseline on all 4 scenarios
-3. Test each variant on same scenarios
-4. Compare compliance rates
-5. Identify which rationalizations break through
-6. Iterate on winning variant to close holes
+1. 创建子智能体测试线束
+2. 在所有 4 个场景上运行 NULL 基线
+3. 在相同场景上测试每个变体
+4. 比较合规率
+5. 识别哪些合理化突破了
+6. 迭代获胜的变体以堵住漏洞

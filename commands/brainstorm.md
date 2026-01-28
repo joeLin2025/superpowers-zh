@@ -1,5 +1,5 @@
 ---
-description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores requirements and design before implementation."
+description: "你必须在任何创造性工作之前使用此技能——创建功能、构建组件、增加功能或修改行为。在实施前探索需求和设计。"
 disable-model-invocation: true
 ---
 

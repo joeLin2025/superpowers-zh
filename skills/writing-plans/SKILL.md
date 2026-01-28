@@ -1,50 +1,50 @@
 ---
 name: writing-plans
-description: Use when you have a spec or requirements for a multi-step task, before touching code
+description: 当你对多步任务有规范或需求时使用，在接触代码之前
 ---
 
-# Writing Plans
+# 编写计划 (Writing Plans)
 
-## Overview
+## 概述
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
+编写全面的实施计划，假设工程师对我们的代码库毫无背景知识且品味值得怀疑。记录他们需要知道的一切：每个任务需要触及哪些文件、代码、测试、他们可能需要检查的文档、如何测试。以一口大小 (bite-sized) 的任务形式给他们整个计划。DRY. YAGNI. TDD. 频繁提交。
 
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+假设他们是一个熟练的开发人员，但对我们的工具集或问题领域几乎一无所知。假设他们不太懂良好的测试设计。
 
-**Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
+**开始时宣布：** "我正在使用 writing-plans 技能来创建实施计划。"
 
-**Context:** This should be run in a dedicated worktree (created by brainstorming skill).
+**上下文：** 这应该在专用的工作树中运行（由 brainstorming 技能创建）。
 
-**Save plans to:** `docs/plans/YYYY-MM-DD-<feature-name>.md`
+**保存计划至：** `docs/plans/YYYY-MM-DD-<feature-name>.md`
 
-## Bite-Sized Task Granularity
+## 一口大小的任务粒度 (Bite-Sized Task Granularity)
 
-**Each step is one action (2-5 minutes):**
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
-- "Commit" - step
+**每一步是一个动作 (2-5 分钟):**
+- "编写失败的测试" - 步骤
+- "运行它以确保它失败" - 步骤
+- "实施最少的代码使测试通过" - 步骤
+- "运行测试并确保它们通过" - 步骤
+- "提交" - 步骤
 
-## Plan Document Header
+## 计划文档头
 
-**Every plan MUST start with this header:**
+**每个计划必须以这个头部开始：**
 
 ```markdown
 # [Feature Name] Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** [One sentence describing what this builds]
+**Goal:** [一句话描述这构建了什么]
 
-**Architecture:** [2-3 sentences about approach]
+**Architecture:** [2-3 句关于方法的描述]
 
-**Tech Stack:** [Key technologies/libraries]
+**Tech Stack:** [关键技术/库]
 
 ---
 ```
 
-## Task Structure
+## 任务结构
 
 ```markdown
 ### Task N: [Component Name]
@@ -87,30 +87,30 @@ git commit -m "feat: add specific feature"
 ```
 ```
 
-## Remember
-- Exact file paths always
-- Complete code in plan (not "add validation")
-- Exact commands with expected output
-- Reference relevant skills with @ syntax
-- DRY, YAGNI, TDD, frequent commits
+## 记住
+- 始终使用确切的文件路径
+- 计划中提供完整的代码（不仅仅是“添加验证”）
+- 带有预期输出的确切命令
+- 使用 @ 语法引用相关技能
+- DRY, YAGNI, TDD, 频繁提交
 
-## Execution Handoff
+## 执行移交 (Execution Handoff)
 
-After saving the plan, offer execution choice:
+保存计划后，提供执行选项：
 
-**"Plan complete and saved to `docs/plans/<filename>.md`. Two execution options:**
+**"计划已完成并保存至 `docs/plans/<filename>.md`。两个执行选项：**
 
-**1. Subagent-Driven (this session)** - I dispatch fresh subagent per task, review between tasks, fast iteration
+**1. Subagent-Driven (本次会话)** - 我为每个任务分派新的子智能体，任务之间进行审查，快速迭代
 
-**2. Parallel Session (separate)** - Open new session with executing-plans, batch execution with checkpoints
+**2. Parallel Session (单独会话)** - 打开新会话使用 executing-plans，带检查点的批量执行
 
-**Which approach?"**
+**选择哪种方法？"**
 
-**If Subagent-Driven chosen:**
-- **REQUIRED SUB-SKILL:** Use superpowers:subagent-driven-development
-- Stay in this session
-- Fresh subagent per task + code review
+**如果选择 Subagent-Driven:**
+- **REQUIRED SUB-SKILL:** 使用 superpowers:subagent-driven-development
+- 留在此会话中
+- 每个任务新的子智能体 + 代码审查
 
-**If Parallel Session chosen:**
-- Guide them to open new session in worktree
-- **REQUIRED SUB-SKILL:** New session uses superpowers:executing-plans
+**如果选择 Parallel Session:**
+- 引导他们在工作树中打开新会话
+- **REQUIRED SUB-SKILL:** 新会话使用 superpowers:executing-plans
