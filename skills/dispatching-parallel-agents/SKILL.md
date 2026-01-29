@@ -1,4 +1,4 @@
----
+﻿---
 name: dispatching-parallel-agents
 description: 当面对 2 个以上相互独立的任务，且它们之间没有共享状态或顺序依赖关系时使用
 ---

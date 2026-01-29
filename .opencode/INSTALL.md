@@ -1,4 +1,4 @@
-# 安装 Superpowers for OpenCode
+﻿# 安装 Superpowers-zh for OpenCode
 
 ## 先决条件
 
@@ -7,10 +7,10 @@
 
 ## 安装步骤
 
-### 1. 克隆 Superpowers
+### 1. 克隆 Superpowers-zh
 
 ```bash
-git clone https://github.com/obra/superpowers.git ~/.config/opencode/superpowers
+git clone https://github.com/superpowers-zh/superpowers-zh.git ~/.config/opencode/superpowers-zh
 ```
 
 ### 2. 注册插件
@@ -20,24 +20,24 @@ git clone https://github.com/obra/superpowers.git ~/.config/opencode/superpowers
 ```bash
 mkdir -p ~/.config/opencode/plugins
 rm -f ~/.config/opencode/plugins/superpowers.js
-ln -s ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js ~/.config/opencode/plugins/superpowers.js
+ln -s ~/.config/opencode/superpowers-zh/.opencode/plugins/superpowers.js ~/.config/opencode/plugins/superpowers.js
 ```
 
 ### 3. 符号链接技能
 
-创建一个符号链接，以便 OpenCode 的原生 skill 工具发现 superpowers 技能：
+创建一个符号链接，以便 OpenCode 的原生 skill 工具发现 superpowers-zh 技能：
 
 ```bash
 mkdir -p ~/.config/opencode/skills
-rm -rf ~/.config/opencode/skills/superpowers
-ln -s ~/.config/opencode/superpowers/skills ~/.config/opencode/skills/superpowers
+rm -rf ~/.config/opencode/skills/superpowers-zh
+ln -s ~/.config/opencode/superpowers-zh/skills ~/.config/opencode/skills/superpowers-zh
 ```
 
 ### 4. 重启 OpenCode
 
-重启 OpenCode。插件将自动注入 superpowers 上下文。
+重启 OpenCode。插件将自动注入 superpowers-zh 上下文。
 
-通过询问验证：“你有 superpowers 吗？”
+通过询问验证：“你有 superpowers-zh 吗？”
 
 ## 用法
 
@@ -54,7 +54,7 @@ use skill tool to list skills
 使用 OpenCode 的原生 `skill` 工具加载特定技能：
 
 ```
-use skill tool to load superpowers/brainstorming
+use skill tool to load superpowers-zh/brainstorming
 ```
 
 ### 个人技能
@@ -82,12 +82,12 @@ description: Use when [condition] - [what it does]
 
 在项目内的 `.opencode/skills/` 中创建特定于项目的技能。
 
-**技能优先级:** 项目技能 > 个人技能 > Superpowers 技能
+**技能优先级:** 项目技能 > 个人技能 > Superpowers-zh 技能
 
 ## 更新
 
 ```bash
-cd ~/.config/opencode/superpowers
+cd ~/.config/opencode/superpowers-zh
 git pull
 ```
 
@@ -96,13 +96,13 @@ git pull
 ### 插件未加载
 
 1. 检查插件符号链接：`ls -l ~/.config/opencode/plugins/superpowers.js`
-2. 检查源是否存在：`ls ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js`
+2. 检查源是否存在：`ls ~/.config/opencode/superpowers-zh/.opencode/plugins/superpowers.js`
 3. 检查 OpenCode 日志以获取错误
 
 ### 技能未找到
 
-1. 检查技能符号链接：`ls -l ~/.config/opencode/skills/superpowers`
-2. 验证它指向：`~/.config/opencode/superpowers/skills`
+1. 检查技能符号链接：`ls -l ~/.config/opencode/skills/superpowers-zh`
+2. 验证它指向：`~/.config/opencode/superpowers-zh/skills`
 3. 使用 `skill` 工具列出发现的内容
 
 ### 工具映射
@@ -115,5 +115,5 @@ git pull
 
 ## 获取帮助
 
-- 报告问题: https://github.com/obra/superpowers/issues
-- 完整文档: https://github.com/obra/superpowers/blob/main/docs/README.opencode.md
+- 报告问题: https://github.com/superpowers-zh/superpowers-zh/issues
+- 完整文档: https://github.com/superpowers-zh/superpowers-zh/blob/main/docs/README.opencode.md

@@ -1,6 +1,6 @@
-# 核心技能本土化增强实施计划
+﻿# 核心技能本土化增强实施计划
 
-> **实现:** 必须使用的子技能: 使用 superpowers:executing-plans 来逐项任务实施此计划。
+> **实现:** 必须使用的子技能: 使用 superpowers-zh:executing-plans 来逐项任务实施此计划。
 
 **目标:** 对核心技能进行中文本土化增强，提升交互体验，同时确保所有结构化 Key 和代码标识符保持不变。
 
@@ -10,10 +10,10 @@
 
 ---
 
-### 任务 1: 增强 `using-superpowers` 技能
+### 任务 1: 增强 `using-superpowers-zh` 技能
 
 **涉及文件:**
-- 修改: `skills/using-superpowers/SKILL.md`
+- 修改: `skills/using-superpowers-zh/SKILL.md`
 
 **步骤 1: 读取并汉化说明**
 读取文件，将 `instructions` 中的所有英文引导、规则描述、以及危险信号表格进行汉化。

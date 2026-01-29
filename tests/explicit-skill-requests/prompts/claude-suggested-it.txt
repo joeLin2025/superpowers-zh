@@ -1,4 +1,4 @@
-[Previous assistant message]:
+﻿[Previous assistant message]:
 Plan complete and saved to docs/plans/auth-system.md.
 
 Two execution options:

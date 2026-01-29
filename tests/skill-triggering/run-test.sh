@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Test skill triggering with naive prompts
 # Usage: ./run-test.sh <skill-name> <prompt-file>
 #
@@ -19,7 +19,7 @@ fi
 
 # Get the directory where this script lives (should be tests/skill-triggering)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# Get the superpowers plugin root (two levels up from tests/skill-triggering)
+# Get the Superpowers-zh plugin root (two levels up from tests/skill-triggering)
 PLUGIN_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 TIMESTAMP=$(date +%s)

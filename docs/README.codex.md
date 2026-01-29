@@ -1,13 +1,13 @@
-# Superpowers for Codex
+﻿# Superpowers-zh for Codex
 
-使用 Superpowers 与 OpenAI Codex 的完整指南。
+使用 Superpowers-zh 与 OpenAI Codex 的完整指南。
 
 ## 快速安装
 
 告诉 Codex:
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/superpowers-zh/superpowers-zh/refs/heads/main/.codex/INSTALL.md
 ```
 
 ## 手动安装
@@ -19,11 +19,11 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 
 ### 安装步骤
 
-#### 1. 克隆 Superpowers
+#### 1. 克隆 Superpowers-zh
 
 ```bash
-mkdir -p ~/.codex/superpowers
-git clone https://github.com/obra/superpowers.git ~/.codex/superpowers
+mkdir -p ~/.codex/superpowers-zh
+git clone https://github.com/superpowers-zh/superpowers-zh.git ~/.codex/superpowers-zh
 ```
 
 #### 2. 安装引导程序
@@ -35,7 +35,7 @@ git clone https://github.com/obra/superpowers.git ~/.codex/superpowers
 告诉 Codex:
 
 ```
-Run ~/.codex/superpowers/.codex/superpowers-codex find-skills to show available skills
+Run ~/.codex/superpowers-zh/.codex/superpowers-codex find-skills to show available skills
 ```
 
 你应该看到带有描述的可用技能列表。
@@ -45,19 +45,19 @@ Run ~/.codex/superpowers/.codex/superpowers-codex find-skills to show available 
 ### 查找技能
 
 ```
-Run ~/.codex/superpowers/.codex/superpowers-codex find-skills
+Run ~/.codex/superpowers-zh/.codex/superpowers-codex find-skills
 ```
 
 ### 加载技能
 
 ```
-Run ~/.codex/superpowers/.codex/superpowers-codex use-skill superpowers:brainstorming
+Run ~/.codex/superpowers-zh/.codex/superpowers-codex use-skill superpowers-zh:brainstorming
 ```
 
 ### 引导所有技能
 
 ```
-Run ~/.codex/superpowers/.codex/superpowers-codex bootstrap
+Run ~/.codex/superpowers-zh/.codex/superpowers-codex bootstrap
 ```
 
 这会加载带有所有技能信息的完整引导程序。
@@ -83,13 +83,13 @@ description: Use when [condition] - [what it does]
 [Your skill content here]
 ```
 
-同名的个人技能覆盖 superpowers 技能。
+同名的个人技能覆盖 superpowers-zh 技能。
 
 ## 架构
 
 ### Codex CLI 工具
 
-**位置:** `~/.codex/superpowers/.codex/superpowers-codex`
+**位置:** `~/.codex/superpowers-zh/.codex/superpowers-codex`
 
 一个 Node.js CLI 脚本，提供三个命令：
 - `bootstrap` - 加载带有所有技能的完整引导程序
@@ -98,7 +98,7 @@ description: Use when [condition] - [what it does]
 
 ### 共享核心模块
 
-**位置:** `~/.codex/superpowers/lib/skills-core.js`
+**位置:** `~/.codex/superpowers-zh/lib/skills-core.js`
 
 Codex 实现使用共享的 `skills-core` 模块（ES 模块格式）进行技能发现和解析。这与 OpenCode 插件使用的模块相同，确保跨平台的一致行为。
 
@@ -108,13 +108,13 @@ Codex 实现使用共享的 `skills-core` 模块（ES 模块格式）进行技�
 
 - `TodoWrite` → `update_plan`
 - 带有子智能体的 `Task` → 告诉用户子智能体不可用，直接工作
-- `Skill` 工具 → `~/.codex/superpowers/.codex/superpowers-codex use-skill`
+- `Skill` 工具 → `~/.codex/superpowers-zh/.codex/superpowers-codex use-skill`
 - 文件操作 → 原生 Codex 工具
 
 ## 更新
 
 ```bash
-cd ~/.codex/superpowers
+cd ~/.codex/superpowers-zh
 git pull
 ```
 
@@ -122,14 +122,14 @@ git pull
 
 ### 技能未找到
 
-1. 验证安装：`ls ~/.codex/superpowers/skills`
-2. 检查 CLI 是否工作：`~/.codex/superpowers/.codex/superpowers-codex find-skills`
+1. 验证安装：`ls ~/.codex/superpowers-zh/skills`
+2. 检查 CLI 是否工作：`~/.codex/superpowers-zh/.codex/superpowers-codex find-skills`
 3. 验证技能有 SKILL.md 文件
 
 ### CLI 脚本不可执行
 
 ```bash
-chmod +x ~/.codex/superpowers/.codex/superpowers-codex
+chmod +x ~/.codex/superpowers-zh/.codex/superpowers-codex
 ```
 
 ### Node.js 错误
@@ -144,9 +144,8 @@ node --version
 
 ## 获取帮助
 
-- 报告问题: https://github.com/obra/superpowers/issues
-- 主要文档: https://github.com/obra/superpowers
-- 博客文章: https://blog.fsck.com/2025/10/27/skills-for-openai-codex/
+- 报告问题: https://github.com/superpowers-zh/superpowers-zh/issues
+- 主要文档: https://github.com/superpowers-zh/superpowers-zh
 
 ## 注意
 

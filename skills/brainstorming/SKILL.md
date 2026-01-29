@@ -1,4 +1,4 @@
----
+﻿---
 name: brainstorming
 description: "你必须在任何创造性工作之前使用此技能——创建功能、构建组件、增加功能或修改行为。在实施前探索用户意图、需求和设计。"
 ---
@@ -47,8 +47,8 @@ description: "你必须在任何创造性工作之前使用此技能——创建
 
 **实施 (如果继续):**
 - 询问：“准备好进行实施设置了吗？”
-- 使用 superpowers:using-git-worktrees 创建隔离的工作区
-- 使用 superpowers:writing-plans 创建详细的实施计划
+- 使用 superpowers-zh:using-git-worktrees 创建隔离的工作区
+- 使用 superpowers-zh:writing-plans 创建详细的实施计划
 
 ## 关键原则
 

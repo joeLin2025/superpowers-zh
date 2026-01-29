@@ -1,11 +1,11 @@
----
+﻿---
 name: requesting-code-review
 description: 当完成任务、实施主要功能或在合并之前使用，以验证工作是否符合要求
 ---
 
 # 请求代码审查 (Requesting Code Review)
 
-分派 `superpowers:code-reviewer` 子智能体在问题级联之前捕捉它们。该智能体的角色定义在 `./AGENT.md` 中。
+分派 `superpowers-zh:code-reviewer` 子智能体在问题级联之前捕捉它们。该智能体的角色定义在 `./AGENT.md` 中。
 
 **核心原则：** 尽早审查，经常审查。
 
@@ -31,7 +31,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. 分派 code-reviewer 子智能体:**
 
-使用 Task 工具并指定 `superpowers:code-reviewer` 类型，填充 `code-reviewer.md` 任务模板。
+使用 Task 工具并指定 `superpowers-zh:code-reviewer` 类型，填充 `code-reviewer.md` 任务模板。
 
 **占位符:**
 - `{WHAT_WAS_IMPLEMENTED}` - 你刚刚构建了什么
@@ -56,7 +56,7 @@ You: 在继续之前让我请求代码审查。
 BASE_SHA=$(git log --oneline | grep "Task 1" | head -1 | awk '{print $1}')
 HEAD_SHA=$(git rev-parse HEAD)
 
-[分派 superpowers:code-reviewer 子智能体]
+[分派 superpowers-zh:code-reviewer 子智能体]
   WHAT_WAS_IMPLEMENTED: 对话索引的验证和修复函数
   PLAN_OR_REQUIREMENTS: 任务 2 来自 docs/plans/deployment-plan.md
   BASE_SHA: a7981ec

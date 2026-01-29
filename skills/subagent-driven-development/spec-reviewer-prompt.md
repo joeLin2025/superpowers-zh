@@ -1,4 +1,4 @@
-# 规范合规性审查者提示词模板 (Spec Compliance Reviewer Prompt Template)
+﻿# 规范合规性审查者提示词模板 (Spec Compliance Reviewer Prompt Template)
 
 当分派规范合规性审查者子智能体时使用此模板。
 

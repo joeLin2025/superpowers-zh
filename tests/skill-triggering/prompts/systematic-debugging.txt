@@ -1,4 +1,4 @@
-The tests are failing with this error:
+﻿The tests are failing with this error:
 
 ```
 FAIL src/utils/parser.test.ts

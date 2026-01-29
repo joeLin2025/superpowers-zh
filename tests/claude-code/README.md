@@ -1,6 +1,6 @@
-# Claude Code 技能测试
+﻿# Claude Code 技能测试
 
-使用 Claude Code CLI 的 superpowers 技能的自动化测试。
+使用 Claude Code CLI 的 Superpowers-zh 技能的自动化测试。
 
 ## 概述
 
@@ -9,7 +9,7 @@
 ## 要求
 
 - Claude Code CLI 已安装并在 PATH 中 (`claude --version` 应该工作)
-- 本地 superpowers 插件已安装 (见主 README 了解安装)
+- 本地 Superpowers-zh 插件已安装 (见主 README 了解安装)
 
 ## 运行测试
 

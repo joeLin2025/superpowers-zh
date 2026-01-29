@@ -1,4 +1,4 @@
----
+﻿---
 name: executing-plans
 description: 当你又书面的实施计划，需要在单独的会话中执行，并设有审查检查点时使用
 ---
@@ -48,7 +48,7 @@ description: 当你又书面的实施计划，需要在单独的会话中执行�
 
 在所有任务完成并验证后：
 - 宣布：“我正在使用 finishing-a-development-branch 技能来完成这项工作。”
-- **REQUIRED SUB-SKILL:** 使用 superpowers:finishing-a-development-branch
+- **REQUIRED SUB-SKILL:** 使用 superpowers-zh:finishing-a-development-branch
 - 遵循该技能以验证测试，展示选项，执行选择
 
 ## 何时停止并寻求帮助

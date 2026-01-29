@@ -1,6 +1,6 @@
-# Aggressive Cleanup Implementation Plan
+﻿# Aggressive Cleanup Implementation Plan
 
-> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers-zh:executing-plans to implement this plan task-by-task.
 
 **Goal:** Clean up the project by removing temporary artifacts, obsolete documentation, and example projects, while preserving platform guides (.codex, .opencode).
 

@@ -1,4 +1,4 @@
-# Claude Code 的跨平台多语言 Hooks
+﻿# Claude Code 的跨平台多语言 Hooks
 
 Claude Code 插件需要能在 Windows、macOS 和 Linux 上工作的 Hooks。本文档解释了使之成为可能的“多语言包装器 (polyglot wrapper)”技术。
 

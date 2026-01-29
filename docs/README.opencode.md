@@ -1,13 +1,13 @@
-# Superpowers for OpenCode
+﻿# Superpowers-zh for OpenCode
 
-使用 Superpowers 与 [OpenCode.ai](https://opencode.ai) 的完整指南。
+使用 Superpowers-zh 与 [OpenCode.ai](https://opencode.ai) 的完整指南。
 
 ## 快速安装
 
 告诉 OpenCode:
 
 ```
-Clone https://github.com/obra/superpowers to ~/.config/opencode/superpowers, then create directory ~/.config/opencode/plugins, then symlink ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js to ~/.config/opencode/plugins/superpowers.js, then symlink ~/.config/opencode/superpowers/skills to ~/.config/opencode/skills/superpowers, then restart opencode.
+Clone https://github.com/superpowers-zh/superpowers-zh to ~/.config/opencode/superpowers-zh, then create directory ~/.config/opencode/plugins, then symlink ~/.config/opencode/superpowers-zh/.opencode/plugins/Superpowers-zh.js to ~/.config/opencode/plugins/Superpowers-zh.js, then symlink ~/.config/opencode/superpowers-zh/skills to ~/.config/opencode/skills/superpowers-zh, then restart opencode.
 ```
 
 ## 手动安装
@@ -20,23 +20,23 @@ Clone https://github.com/obra/superpowers to ~/.config/opencode/superpowers, the
 ### macOS / Linux
 
 ```bash
-# 1. 安装 Superpowers (或更新现有)
-if [ -d ~/.config/opencode/superpowers ]; then
-  cd ~/.config/opencode/superpowers && git pull
+# 1. 安装 Superpowers-zh (或更新现有)
+if [ -d ~/.config/opencode/superpowers-zh ]; then
+  cd ~/.config/opencode/superpowers-zh && git pull
 else
-  git clone https://github.com/obra/superpowers.git ~/.config/opencode/superpowers
+  git clone https://github.com/superpowers-zh/superpowers-zh.git ~/.config/opencode/superpowers-zh
 fi
 
 # 2. 创建目录
 mkdir -p ~/.config/opencode/plugins ~/.config/opencode/skills
 
 # 3. 如果存在旧的符号链接/目录，则移除
-rm -f ~/.config/opencode/plugins/superpowers.js
-rm -rf ~/.config/opencode/skills/superpowers
+rm -f ~/.config/opencode/plugins/Superpowers-zh.js
+rm -rf ~/.config/opencode/skills/superpowers-zh
 
 # 4. 创建符号链接
-ln -s ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js ~/.config/opencode/plugins/superpowers.js
-ln -s ~/.config/opencode/superpowers/skills ~/.config/opencode/skills/superpowers
+ln -s ~/.config/opencode/superpowers-zh/.opencode/plugins/Superpowers-zh.js ~/.config/opencode/plugins/Superpowers-zh.js
+ln -s ~/.config/opencode/superpowers-zh/skills ~/.config/opencode/skills/superpowers-zh
 
 # 5. 重启 OpenCode
 ```
@@ -44,11 +44,11 @@ ln -s ~/.config/opencode/superpowers/skills ~/.config/opencode/skills/superpower
 #### 验证安装
 
 ```bash
-ls -l ~/.config/opencode/plugins/superpowers.js
-ls -l ~/.config/opencode/skills/superpowers
+ls -l ~/.config/opencode/plugins/Superpowers-zh.js
+ls -l ~/.config/opencode/skills/superpowers-zh
 ```
 
-两者都应该显示指向 superpowers 目录的符号链接。
+两者都应该显示指向 superpowers-zh 目录的符号链接。
 
 ### Windows
 
@@ -65,22 +65,22 @@ ls -l ~/.config/opencode/skills/superpowers
 以管理员身份运行，或启用开发者模式：
 
 ```cmd
-:: 1. 安装 Superpowers
-git clone https://github.com/obra/superpowers.git "%USERPROFILE%\.config\opencode\superpowers"
+:: 1. 安装 Superpowers-zh
+git clone https://github.com/superpowers-zh/superpowers-zh.git "%USERPROFILE%\.config\opencode\superpowers-zh"
 
 :: 2. 创建目录
 mkdir "%USERPROFILE%\.config\opencode\plugins" 2>nul
 mkdir "%USERPROFILE%\.config\opencode\skills" 2>nul
 
 :: 3. 移除现有链接 (重新安装是安全的)
-del "%USERPROFILE%\.config\opencode\plugins\superpowers.js" 2>nul
-rmdir "%USERPROFILE%\.config\opencode\skills\superpowers" 2>nul
+del "%USERPROFILE%\.config\opencode\plugins\Superpowers-zh.js" 2>nul
+rmdir "%USERPROFILE%\.config\opencode\skills\superpowers-zh" 2>nul
 
 :: 4. 创建插件符号链接 (需要开发者模式或管理员)
-mklink "%USERPROFILE%\.config\opencode\plugins\superpowers.js" "%USERPROFILE%\.config\opencode\superpowers\.opencode\plugins\superpowers.js"
+mklink "%USERPROFILE%\.config\opencode\plugins\Superpowers-zh.js" "%USERPROFILE%\.config\superpowers-zh\.opencode\plugins\Superpowers-zh.js"
 
 :: 5. 创建技能 Junction (无需特殊权限即可工作)
-mklink /J "%USERPROFILE%\.config\opencode\skills\superpowers" "%USERPROFILE%\.config\opencode\superpowers\skills"
+mklink /J "%USERPROFILE%\.config\opencode\skills\superpowers-zh" "%USERPROFILE%\.config\superpowers-zh\skills"
 
 :: 6. 重启 OpenCode
 ```
@@ -90,22 +90,22 @@ mklink /J "%USERPROFILE%\.config\opencode\skills\superpowers" "%USERPROFILE%\.co
 以管理员身份运行，或启用开发者模式：
 
 ```powershell
-# 1. 安装 Superpowers
-git clone https://github.com/obra/superpowers.git "$env:USERPROFILE\.config\opencode\superpowers"
+# 1. 安装 Superpowers-zh
+git clone https://github.com/superpowers-zh/superpowers-zh.git "$env:USERPROFILE\.config\opencode\superpowers-zh"
 
 # 2. 创建目录
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.config\opencode\plugins"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.config\opencode\skills"
 
 # 3. 移除现有链接 (重新安装是安全的)
-Remove-Item "$env:USERPROFILE\.config\opencode\plugins\superpowers.js" -Force -ErrorAction SilentlyContinue
-Remove-Item "$env:USERPROFILE\.config\opencode\skills\superpowers" -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:USERPROFILE\.config\opencode\plugins\Superpowers-zh.js" -Force -ErrorAction SilentlyContinue
+Remove-Item "$env:USERPROFILE\.config\opencode\skills\superpowers-zh" -Force -ErrorAction SilentlyContinue
 
 # 4. 创建插件符号链接 (需要开发者模式或管理员)
-New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\opencode\plugins\superpowers.js" -Target "$env:USERPROFILE\.config\opencode\superpowers\.opencode\plugins\superpowers.js"
+New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\.config\opencode\plugins\Superpowers-zh.js" -Target "$env:USERPROFILE\.config\superpowers-zh\.opencode\plugins\Superpowers-zh.js"
 
 # 5. 创建技能 Junction (无需特殊权限即可工作)
-New-Item -ItemType Junction -Path "$env:USERPROFILE\.config\opencode\skills\superpowers" -Target "$env:USERPROFILE\.config\opencode\superpowers\skills"
+New-Item -ItemType Junction -Path "$env:USERPROFILE\.config\opencode\skills\superpowers-zh" -Target "$env:USERPROFILE\.config\superpowers-zh\skills"
 
 # 6. 重启 OpenCode
 ```
@@ -115,21 +115,21 @@ New-Item -ItemType Junction -Path "$env:USERPROFILE\.config\opencode\skills\supe
 注意：Git Bash 的原生 `ln` 命令复制文件而不是创建符号链接。使用 `cmd //c mklink` 代替（`//c` 是 Git Bash 的 `/c` 语法）。
 
 ```bash
-# 1. 安装 Superpowers
-git clone https://github.com/obra/superpowers.git ~/.config/opencode/superpowers
+# 1. 安装 Superpowers-zh
+git clone https://github.com/superpowers-zh/superpowers-zh.git ~/.config/opencode/superpowers-zh
 
 # 2. 创建目录
 mkdir -p ~/.config/opencode/plugins ~/.config/opencode/skills
 
 # 3. 移除现有链接 (重新安装是安全的)
-rm -f ~/.config/opencode/plugins/superpowers.js 2>/dev/null
-rm -rf ~/.config/opencode/skills/superpowers 2>/dev/null
+rm -f ~/.config/opencode/plugins/Superpowers-zh.js 2>/dev/null
+rm -rf ~/.config/opencode/skills/superpowers-zh 2>/dev/null
 
 # 4. 创建插件符号链接 (需要开发者模式或管理员)
-cmd //c "mklink \"$(cygpath -w ~/.config/opencode/plugins/superpowers.js)\" \"$(cygpath -w ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js)\""
+cmd //c "mklink \"$(cygpath -w ~/.config/opencode/plugins/Superpowers-zh.js)\" \"$(cygpath -w ~/.config/opencode/superpowers-zh/.opencode/plugins/Superpowers-zh.js)\""
 
 # 5. 创建技能 Junction (无需特殊权限即可工作)
-cmd //c "mklink /J \"$(cygpath -w ~/.config/opencode/skills/superpowers)\" \"$(cygpath -w ~/.config/opencode/superpowers/skills)\""
+cmd //c "mklink /J \"$(cygpath -w ~/.config/opencode/skills/superpowers-zh)\" \"$(cygpath -w ~/.config/opencode/superpowers-zh/skills)\""
 
 # 6. 重启 OpenCode
 ```
@@ -181,7 +181,7 @@ use skill tool to list skills
 使用 OpenCode 的原生 `skill` 工具加载特定技能：
 
 ```
-use skill tool to load superpowers/brainstorming
+use skill tool to load superpowers-zh/brainstorming
 ```
 
 ### 个人技能
@@ -233,17 +233,17 @@ OpenCode 从以下位置发现技能：
 
 1. **项目技能** (`.opencode/skills/`) - 最高优先级
 2. **个人技能** (`~/.config/opencode/skills/`)
-3. **Superpowers 技能** (`~/.config/opencode/skills/superpowers/`) - 通过符号链接
+3. **Superpowers-zh 技能** (`~/.config/opencode/skills/superpowers-zh/`) - 通过符号链接
 
 ## 功能
 
 ### 自动上下文注入
 
-插件通过 `experimental.chat.system.transform` 钩子自动注入 superpowers 上下文。这将 "using-superpowers" 技能内容添加到每个请求的系统提示词中。
+插件通过 `experimental.chat.system.transform` 钩子自动注入 superpowers-zh 上下文。这将 "using-superpowers-zh" 技能内容添加到每个请求的系统提示词中。
 
 ### 原生技能集成
 
-Superpowers 使用 OpenCode 的原生 `skill` 工具进行技能发现和加载。技能被符号链接到 `~/.config/opencode/skills/superpowers/`，因此它们与你的个人和项目技能一起出现。
+Superpowers-zh 使用 OpenCode 的原生 `skill` 工具进行技能发现和加载。技能被符号链接到 `~/.config/opencode/skills/superpowers-zh/`，因此它们与你的个人和项目技能一起出现。
 
 ### 工具映射
 
@@ -258,22 +258,22 @@ Superpowers 使用 OpenCode 的原生 `skill` 工具进行技能发现和加载�
 
 ### 插件结构
 
-**位置:** `~/.config/opencode/superpowers/.opencode/plugins/superpowers.js`
+**位置:** `~/.config/opencode/superpowers-zh/.opencode/plugins/Superpowers-zh.js`
 
 **组件:**
 - `experimental.chat.system.transform` 钩子用于引导程序注入
-- 读取并注入 "using-superpowers" 技能内容
+- 读取并注入 "using-superpowers-zh" 技能内容
 
 ### 技能
 
-**位置:** `~/.config/opencode/skills/superpowers/` (符号链接到 `~/.config/opencode/superpowers/skills/`)
+**位置:** `~/.config/opencode/skills/superpowers-zh/` (符号链接到 `~/.config/opencode/superpowers-zh/skills/`)
 
 技能由 OpenCode 的原生技能系统发现。每个技能都有一个带有 YAML frontmatter 的 `SKILL.md` 文件。
 
 ## 更新
 
 ```bash
-cd ~/.config/opencode/superpowers
+cd ~/.config/opencode/superpowers-zh
 git pull
 ```
 
@@ -283,14 +283,14 @@ git pull
 
 ### 插件未加载
 
-1. 检查插件是否存在：`ls ~/.config/opencode/superpowers/.opencode/plugins/superpowers.js`
+1. 检查插件是否存在：`ls ~/.config/opencode/superpowers-zh/.opencode/plugins/Superpowers-zh.js`
 2. 检查符号链接/Junction：`ls -l ~/.config/opencode/plugins/` (macOS/Linux) 或 `dir /AL %USERPROFILE%\.config\opencode\plugins` (Windows)
 3. 检查 OpenCode 日志：`opencode run "test" --print-logs --log-level DEBUG`
-4. 在日志中查找插件加载消息
+4. 在日志中寻找插件加载消息
 
 ### 技能未找到
 
-1. 验证技能符号链接：`ls -l ~/.config/opencode/skills/superpowers` (应指向 superpowers/skills/)
+1. 验证技能符号链接：`ls -l ~/.config/opencode/skills/superpowers-zh` (应指向 superpowers-zh/skills/)
 2. 使用 OpenCode 的 `skill` 工具列出可用技能
 3. 检查技能结构：每个技能需要一个具有有效 frontmatter 的 `SKILL.md` 文件
 
@@ -302,14 +302,14 @@ git pull
 
 ### 引导程序未出现
 
-1. 验证 using-superpowers 技能是否存在：`ls ~/.config/opencode/superpowers/skills/using-superpowers/SKILL.md`
+1. 验证 using-superpowers-zh 技能是否存在：`ls ~/.config/opencode/superpowers-zh/skills/using-superpowers-zh/SKILL.md`
 2. 检查 OpenCode 版本支持 `experimental.chat.system.transform` 钩子
 3. 插件更改后重启 OpenCode
 
 ## 获取帮助
 
-- 报告问题: https://github.com/obra/superpowers/issues
-- 主要文档: https://github.com/obra/superpowers
+- 报告问题: https://github.com/superpowers-zh/superpowers-zh/issues
+- 主要文档: https://github.com/superpowers-zh/superpowers-zh
 - OpenCode 文档: https://opencode.ai/docs/
 
 ## 测试
@@ -318,13 +318,13 @@ git pull
 
 ```bash
 # 检查插件加载
-opencode run --print-logs "hello" 2>&1 | grep -i superpowers
+opencode run --print-logs "hello" 2>&1 | grep -i superpowers-zh
 
 # 检查技能可发现
-opencode run "use skill tool to list all skills" 2>&1 | grep -i superpowers
+opencode run "use skill tool to list all skills" 2>&1 | grep -i superpowers-zh
 
 # 检查引导程序注入
-opencode run "what superpowers do you have?"
+opencode run "what Superpowers-zh do you have?"
 ```
 
-智能体应该提及拥有 superpowers 并能列出来自 `superpowers/` 的技能。
+智能体应该提及拥有 superpowers-zh 并能列出来自 `superpowers-zh/` 的技能。

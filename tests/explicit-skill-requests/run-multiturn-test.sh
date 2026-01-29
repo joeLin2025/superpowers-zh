@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Test explicit skill requests in multi-turn conversations
 # Usage: ./run-multiturn-test.sh
 #

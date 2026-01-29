@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 
 /**
  * 将技能的 SKILL.md 中的 graphviz 图表渲染为 SVG 文件。

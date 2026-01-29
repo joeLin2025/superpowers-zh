@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Test: Skills Core Library
 # Tests the skills-core.js library functions directly via Node.js
 # Does not require OpenCode - tests pure library functionality
@@ -249,7 +249,7 @@ fi
 echo ""
 echo "Test 4: Testing resolveSkillPath..."
 
-# Create skills in personal and superpowers locations for testing
+# Create skills in personal and Superpowers-zh locations for testing
 mkdir -p "$TEST_HOME/personal-skills/shared-skill"
 mkdir -p "$TEST_HOME/superpowers-skills/shared-skill"
 mkdir -p "$TEST_HOME/superpowers-skills/unique-skill"
@@ -265,15 +265,15 @@ EOF
 cat > "$TEST_HOME/superpowers-skills/shared-skill/SKILL.md" <<'EOF'
 ---
 name: shared-skill
-description: Superpowers version
+description: Superpowers-zh version
 ---
-# Superpowers Shared
+# Superpowers-zh Shared
 EOF
 
 cat > "$TEST_HOME/superpowers-skills/unique-skill/SKILL.md" <<'EOF'
 ---
 name: unique-skill
-description: Only in superpowers
+description: Only in Superpowers-zh
 ---
 # Unique
 EOF
@@ -283,8 +283,8 @@ const fs = require('fs');
 const path = require('path');
 
 function resolveSkillPath(skillName, superpowersDir, personalDir) {
-    const forceSuperpowers = skillName.startsWith('superpowers:');
-    const actualSkillName = forceSuperpowers ? skillName.replace(/^superpowers:/, '') : skillName;
+    const forceSuperpowers = skillName.startsWith('superpowers-zh:');
+    const actualSkillName = forceSuperpowers ? skillName.replace(/^superpowers-zh:/, '') : skillName;
 
     if (!forceSuperpowers && personalDir) {
         const personalPath = path.join(personalDir, actualSkillName);
@@ -304,7 +304,7 @@ function resolveSkillPath(skillName, superpowersDir, personalDir) {
         if (fs.existsSync(superpowersSkillFile)) {
             return {
                 skillFile: superpowersSkillFile,
-                sourceType: 'superpowers',
+                sourceType: 'Superpowers-zh',
                 skillPath: actualSkillName
             };
         }
@@ -320,11 +320,11 @@ const personalDir = '$TEST_HOME/personal-skills';
 const shared = resolveSkillPath('shared-skill', superpowersDir, personalDir);
 console.log('SHARED:', JSON.stringify(shared));
 
-// Test 2: superpowers: prefix should force superpowers
-const forced = resolveSkillPath('superpowers:shared-skill', superpowersDir, personalDir);
+// Test 2: superpowers-zh: prefix should force Superpowers-zh
+const forced = resolveSkillPath('superpowers-zh:shared-skill', superpowersDir, personalDir);
 console.log('FORCED:', JSON.stringify(forced));
 
-// Test 3: Unique skill should resolve to superpowers
+// Test 3: Unique skill should resolve to Superpowers-zh
 const unique = resolveSkillPath('unique-skill', superpowersDir, personalDir);
 console.log('UNIQUE:', JSON.stringify(unique));
 
@@ -334,24 +334,24 @@ console.log('NOTFOUND:', JSON.stringify(notfound));
 " 2>&1)
 
 if echo "$result" | grep -q 'SHARED:.*"sourceType":"personal"'; then
-    echo "  [PASS] Personal skills shadow superpowers skills"
+    echo "  [PASS] Personal skills shadow Superpowers-zh skills"
 else
     echo "  [FAIL] Personal skills not shadowing correctly"
     echo "  Result: $result"
     exit 1
 fi
 
-if echo "$result" | grep -q 'FORCED:.*"sourceType":"superpowers"'; then
-    echo "  [PASS] superpowers: prefix forces superpowers resolution"
+if echo "$result" | grep -q 'FORCED:.*"sourceType":"Superpowers-zh"'; then
+    echo "  [PASS] superpowers-zh: prefix forces Superpowers-zh resolution"
 else
-    echo "  [FAIL] superpowers: prefix not working"
+    echo "  [FAIL] superpowers-zh: prefix not working"
     exit 1
 fi
 
-if echo "$result" | grep -q 'UNIQUE:.*"sourceType":"superpowers"'; then
-    echo "  [PASS] Unique superpowers skills are found"
+if echo "$result" | grep -q 'UNIQUE:.*"sourceType":"Superpowers-zh"'; then
+    echo "  [PASS] Unique Superpowers-zh skills are found"
 else
-    echo "  [FAIL] Unique superpowers skills not found"
+    echo "  [FAIL] Unique Superpowers-zh skills not found"
     exit 1
 fi
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Helper functions for Claude Code skill tests
 
 # Run Claude Code with a prompt and capture output

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Analyze token usage from Claude Code session transcripts.
 Breaks down usage by main session and individual subagents.

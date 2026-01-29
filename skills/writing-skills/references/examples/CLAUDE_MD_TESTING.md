@@ -1,4 +1,4 @@
-# 测试 CLAUDE.md 技能文档 (Testing CLAUDE.md Skills Documentation)
+﻿# 测试 CLAUDE.md 技能文档 (Testing CLAUDE.md Skills Documentation)
 
 测试不同的文档变体，以找出在压力下实际能让 Agent 发现和使用技能的方法。
 

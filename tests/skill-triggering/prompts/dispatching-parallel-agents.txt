@@ -1,4 +1,4 @@
-I have 4 independent test failures happening in different modules:
+﻿I have 4 independent test failures happening in different modules:
 
 1. tests/auth/login.test.ts - "should redirect after login" is failing
 2. tests/api/users.test.ts - "should return user list" returns 500

@@ -1,4 +1,4 @@
----
+﻿---
 name: using-git-worktrees
 description: 当开始需要与当前工作区隔离的功能工作，或在执行实施计划之前使用——通过智能目录选择和安全验证创建隔离的 git 工作树
 ---
@@ -43,7 +43,7 @@ grep -i "worktree.*director" CLAUDE.md 2>/dev/null
 No worktree directory found. Where should I create worktrees?
 
 1. .worktrees/ (project-local, hidden)
-2. ~/.config/superpowers/worktrees/<project-name>/ (global location)
+2. ~/.config/superpowers-zh/worktrees/<project-name>/ (global location)
 
 Which would you prefer?
 ```
@@ -61,14 +61,14 @@ git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/d
 
 **如果未忽略：**
 
-根据 Jesse 的规则“立即修复损坏的东西”：
+根据 Superpowers-zh 准则“立即修复损坏的东西”：
 1. 向 .gitignore 添加适当的行
 2. 提交更改
 3. 继续创建工作树
 
 **为何关键：** 防止意外将工作树内容提交到仓库。
 
-### 对于全局目录 (~/.config/superpowers/worktrees)
+### 对于全局目录 (~/.config/superpowers-zh/worktrees)
 
 不需要 .gitignore 验证 - 完全在项目之外。
 
@@ -88,8 +88,8 @@ case $LOCATION in
   .worktrees|worktrees)
     path="$LOCATION/$BRANCH_NAME"
     ;;
-  ~/.config/superpowers/worktrees/*)
-    path="~/.config/superpowers/worktrees/$project/$BRANCH_NAME"
+  ~/.config/superpowers-zh/worktrees/*)
+    path="~/.config/superpowers-zh/worktrees/$project/$BRANCH_NAME"
     ;;
 esac
 
@@ -188,7 +188,7 @@ You: 我正在使用 using-git-worktrees 技能来设置隔离的工作区。
 [运行 npm install]
 [运行 npm test - 47 passing]
 
-Worktree ready at /Users/jesse/myproject/.worktrees/auth
+Worktree ready at /Users/user/myproject/.worktrees/auth
 Tests passing (47 tests, 0 failures)
 Ready to implement auth feature
 ```

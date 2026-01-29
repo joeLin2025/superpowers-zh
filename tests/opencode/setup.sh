@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Setup script for OpenCode plugin tests
 # Creates an isolated test environment with proper plugin installation
 set -euo pipefail
@@ -13,18 +13,18 @@ export XDG_CONFIG_HOME="$TEST_HOME/.config"
 export OPENCODE_CONFIG_DIR="$TEST_HOME/.config/opencode"
 
 # Install plugin to test location
-mkdir -p "$HOME/.config/opencode/superpowers"
-cp -r "$REPO_ROOT/lib" "$HOME/.config/opencode/superpowers/"
-cp -r "$REPO_ROOT/skills" "$HOME/.config/opencode/superpowers/"
+mkdir -p "$HOME/.config/opencode/Superpowers-zh"
+cp -r "$REPO_ROOT/lib" "$HOME/.config/opencode/Superpowers-zh/"
+cp -r "$REPO_ROOT/skills" "$HOME/.config/opencode/Superpowers-zh/"
 
 # Copy plugin directory
-mkdir -p "$HOME/.config/opencode/superpowers/.opencode/plugins"
-cp "$REPO_ROOT/.opencode/plugins/superpowers.js" "$HOME/.config/opencode/superpowers/.opencode/plugins/"
+mkdir -p "$HOME/.config/opencode/Superpowers-zh/.opencode/plugins"
+cp "$REPO_ROOT/.opencode/plugins/Superpowers-zh.js" "$HOME/.config/opencode/Superpowers-zh/.opencode/plugins/"
 
 # Register plugin via symlink
 mkdir -p "$HOME/.config/opencode/plugins"
-ln -sf "$HOME/.config/opencode/superpowers/.opencode/plugins/superpowers.js" \
-       "$HOME/.config/opencode/plugins/superpowers.js"
+ln -sf "$HOME/.config/opencode/Superpowers-zh/.opencode/plugins/Superpowers-zh.js" \
+       "$HOME/.config/opencode/plugins/Superpowers-zh.js"
 
 # Create test skills in different locations for testing
 
@@ -57,8 +57,8 @@ PROJECT_SKILL_MARKER_67890
 EOF
 
 echo "Setup complete: $TEST_HOME"
-echo "Plugin installed to: $HOME/.config/opencode/superpowers/.opencode/plugins/superpowers.js"
-echo "Plugin registered at: $HOME/.config/opencode/plugins/superpowers.js"
+echo "Plugin installed to: $HOME/.config/opencode/Superpowers-zh/.opencode/plugins/Superpowers-zh.js"
+echo "Plugin registered at: $HOME/.config/opencode/plugins/Superpowers-zh.js"
 echo "Test project at: $TEST_HOME/test-project"
 
 # Helper function for cleanup (call from tests or trap)

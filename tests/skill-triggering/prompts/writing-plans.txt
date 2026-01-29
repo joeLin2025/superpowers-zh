@@ -1,4 +1,4 @@
-Here's the spec for our new authentication system:
+﻿Here's the spec for our new authentication system:
 
 Requirements:
 - Users can register with email/password

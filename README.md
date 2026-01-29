@@ -1,6 +1,6 @@
-# Superpowers
+﻿# Superpowers-zh
 
-Superpowers 是为你的编程智能体（Coding Agent）打造的一套完整的软件开发工作流，建立在一系列可组合的“技能（Skills）”之上，并包含一些初始指令以确保智能体正确使用这些技能。
+Superpowers-zh 是为你的编程智能体（Coding Agent）打造的一套完整的软件开发工作流，建立在一系列可组合的“技能（Skills）”之上，并包含一些初始指令以确保智能体正确使用这些技能。
 
 ## 工作原理
 
@@ -12,15 +12,7 @@ Superpowers 是为你的编程智能体（Coding Agent）打造的一套完整�
 
 接下来，一旦你说“开始”，它就会启动一个*子智能体驱动开发（subagent-driven-development）*流程，让智能体逐个完成工程任务，检查和审查他们的工作，然后继续前进。Claude 连续自主工作几个小时而不偏离你制定的计划，这种情况并不罕见。
 
-还有很多其他功能，但这是系统的核心。而且因为技能会自动触发，你不需要做任何特别的事情。你的编程智能体自然就拥有了 Superpowers。
-
-## 赞助
-
-如果 Superpowers 帮助你赚到了钱，或者你有此意愿，如果你能考虑[赞助我的开源工作](https://github.com/sponsors/obra)，我将不胜感激。
-
-谢谢！
-
-- Jesse
+还有很多其他功能，但这是系统的核心。而且因为技能会自动触发，你不需要做任何特别的事情。你的编程智能体自然就拥有了 Superpowers-zh。
 
 ## 安装
 
@@ -31,13 +23,13 @@ Superpowers 是为你的编程智能体（Coding Agent）打造的一套完整�
 在 Claude Code 中，首先注册市场：
 
 ```bash
-/plugin marketplace add obra/superpowers-marketplace
+/plugin marketplace add superpowers-zh/superpowers-marketplace
 ```
 
 然后从该市场安装插件：
 
 ```bash
-/plugin install superpowers@superpowers-marketplace
+/plugin install superpowers-zh@superpowers-marketplace
 ```
 
 ### 验证安装
@@ -50,9 +42,9 @@ Superpowers 是为你的编程智能体（Coding Agent）打造的一套完整�
 
 ```
 # 应该能看到：
-# /superpowers:brainstorm - 交互式设计细化
-# /superpowers:write-plan - 创建实施计划
-# /superpowers:execute-plan - 批量执行计划
+# /superpowers-zh:brainstorm - 交互式设计细化
+# /superpowers-zh:write-plan - 创建实施计划
+# /superpowers-zh:execute-plan - 批量执行计划
 ```
 
 ### Codex
@@ -60,7 +52,7 @@ Superpowers 是为你的编程智能体（Coding Agent）打造的一套完整�
 告诉 Codex：
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.codex/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/superpowers-zh/superpowers-zh/refs/heads/main/.codex/INSTALL.md
 ```
 
 **详细文档：** [docs/README.codex.md](docs/README.codex.md)
@@ -70,7 +62,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 告诉 OpenCode：
 
 ```
-Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+Fetch and follow instructions from https://raw.githubusercontent.com/superpowers-zh/superpowers-zh/refs/heads/main/.opencode/INSTALL.md
 ```
 
 **详细文档：** [docs/README.opencode.md](docs/README.opencode.md)
@@ -117,7 +109,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 
 **元技能**
 - **writing-skills** - 遵循最佳实践创建新技能（包括测试方法论）
-- **using-superpowers** - 技能系统介绍
+- **using-superpowers-zh** - 技能系统介绍
 
 ## 哲学
 
@@ -125,8 +117,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 - **系统化胜于临时起意 (Systematic over ad-hoc)** - 流程优于猜测
 - **降低复杂性 (Complexity reduction)** - 简单是首要目标
 - **证据胜于主张 (Evidence over claims)** - 在宣布成功前进行验证
-
-阅读更多：[Superpowers for Claude Code](https://blog.fsck.com/2025/10/09/superpowers/)
 
 ## 贡献
 
@@ -144,7 +134,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/obra/superp
 当你更新插件时，技能会自动更新：
 
 ```bash
-/plugin update superpowers
+/plugin update superpowers-zh
 ```
 
 ## 许可证
@@ -153,5 +143,9 @@ MIT License - 详情请见 LICENSE 文件
 
 ## 支持
 
-- **Issues**: https://github.com/obra/superpowers/issues
-- **Marketplace**: https://github.com/obra/superpowers-marketplace
+- **Issues**: https://github.com/superpowers-zh/superpowers-zh/issues
+- **Marketplace**: https://github.com/superpowers-zh/superpowers-marketplace
+
+---
+
+本项目基于 [obra/superpowers](https://github.com/obra/superpowers) 进行二次开发与本土化增强。

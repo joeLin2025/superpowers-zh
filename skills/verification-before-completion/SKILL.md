@@ -1,4 +1,4 @@
----
+﻿---
 name: verification-before-completion
 description: 当准备声称工作已完成、已修复或已通过时使用，在提交或创建 PR 之前——要求在做出任何成功声明之前运行验证命令并确认输出；始终是证据优先于断言
 ---

@@ -1,13 +1,12 @@
-{
-  "name": "superpowers",
-  "description": "Core skills library for Claude Code: TDD, debugging, collaboration patterns, and proven techniques",
+﻿{
+  "name": "superpowers-zh",
+  "description": "Core skills library for Claude Code (Simplified Chinese Localization): TDD, debugging, collaboration patterns, and proven techniques",
   "version": "4.1.1",
   "author": {
-    "name": "Jesse Vincent",
-    "email": "jesse@fsck.com"
+    "name": "Superpowers-zh Team"
   },
-  "homepage": "https://github.com/obra/superpowers",
-  "repository": "https://github.com/obra/superpowers",
+  "homepage": "https://github.com/superpowers-zh/superpowers-zh",
+  "repository": "https://github.com/superpowers-zh/superpowers-zh",
   "license": "MIT",
-  "keywords": ["skills", "tdd", "debugging", "collaboration", "best-practices", "workflows"]
+  "keywords": ["skills", "tdd", "debugging", "collaboration", "best-practices", "workflows", "zh-cn"]
 }

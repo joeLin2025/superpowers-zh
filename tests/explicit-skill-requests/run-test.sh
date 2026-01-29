@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Test explicit skill requests (user names a skill directly)
 # Usage: ./run-test.sh <skill-name> <prompt-file>
 #
@@ -21,7 +21,7 @@ fi
 
 # Get the directory where this script lives
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# Get the superpowers plugin root (two levels up)
+# Get the Superpowers-zh plugin root (two levels up)
 PLUGIN_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
 TIMESTAMP=$(date +%s)

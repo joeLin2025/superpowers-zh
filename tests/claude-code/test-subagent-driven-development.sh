@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Test: subagent-driven-development skill
 # Verifies that the skill is loaded and follows correct workflow
 set -euo pipefail

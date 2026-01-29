@@ -1,6 +1,6 @@
-# 测试 Superpowers 技能
+﻿# 测试 Superpowers-zh 技能
 
-本文档描述如何测试 Superpowers 技能，特别是针对复杂技能（如 `subagent-driven-development`）的集成测试。
+本文档描述如何测试 Superpowers-zh 技能，特别是针对复杂技能（如 `subagent-driven-development`）的集成测试。
 
 ## 概述
 
@@ -33,9 +33,9 @@ cd tests/claude-code
 
 ### 要求
 
-- 必须从 **superpowers 插件目录** 运行（不是从临时目录）
+- 必须从 **Superpowers-zh 插件目录** 运行（不是从临时目录）
 - Claude Code 必须已安装且作为 `claude` 命令可用
-- 本地开发市场必须在 `~/.claude/settings.json` 中启用：`"superpowers@superpowers-dev": true`
+- 本地开发市场必须在 `~/.claude/settings.json` 中启用：`"Superpowers-zh@superpowers-dev": true`
 
 ## 集成测试：subagent-driven-development
 
@@ -149,8 +149,8 @@ python3 tests/claude-code/analyze-token-usage.py ~/.claude/projects/<project-di
 会话脚本存储在 `~/.claude/projects/` 中，工作目录路径已编码：
 
 ```bash
-# Example for /Users/jesse/Documents/GitHub/superpowers/superpowers
-SESSION_DIR="$HOME/.claude/projects/-Users-jesse-Documents-GitHub-superpowers-superpowers"
+# Example for /Users/user/Documents/GitHub/Superpowers-zh/Superpowers-zh
+SESSION_DIR="$HOME/.claude/projects/-Users-user-Documents-GitHub-superpowers-superpowers"
 
 # Find recent sessions
 ls -lt "$SESSION_DIR"/*.jsonl | head -5
@@ -182,8 +182,8 @@ ls -lt "$SESSION_DIR"/*.jsonl | head -5
 **问题**：运行无头测试时未找到技能
 
 **解决方案**：
-1. 确保你从 superpowers 目录运行：`cd /path/to/superpowers && tests/...`
-2. 检查 `~/.claude/settings.json` 在 `enabledPlugins` 中有 `"superpowers@superpowers-dev": true`
+1. 确保你从 Superpowers-zh 目录运行：`cd /path/to/Superpowers-zh && tests/...`
+2. 检查 `~/.claude/settings.json` 在 `enabledPlugins` 中有 `"Superpowers-zh@superpowers-dev": true`
 3. 验证技能存在于 `skills/` 目录中
 
 ### 权限错误
@@ -258,7 +258,7 @@ python3 "$SCRIPT_DIR/analyze-token-usage.py" "$SESSION_FILE"
 1. **始终清理**：使用 trap 清理临时目录
 2. **解析脚本**：不要 grep 用户面向的输出 - 解析 `.jsonl` 会话文件
 3. **授予权限**：使用 `--permission-mode bypassPermissions` 和 `--add-dir`
-4. **从插件目录运行**：技能仅在从 superpowers 目录运行时加载
+4. **从插件目录运行**：技能仅在从 Superpowers-zh 目录运行时加载
 5. **显示 token 使用量**：始终包含 token 分析以获得成本可见性
 6. **测试真实行为**：验证创建的实际文件、通过的测试、进行的提交
 

@@ -1,7 +1,7 @@
 /**
- * Superpowers plugin for OpenCode.ai
+ * Superpowers-zh plugin for OpenCode.ai
  *
- * Injects superpowers bootstrap context via system prompt transform.
+ * Injects superpowers-zh bootstrap context via system prompt transform.
  * Skills are discovered via OpenCode's native skill tool from symlinked directory.
  */
 
@@ -54,28 +54,27 @@ export const SuperpowersPlugin = async ({ client, directory }) => {
 
   // Helper to generate bootstrap content
   const getBootstrapContent = () => {
-    // Try to load using-superpowers skill
+    // Try to load using-superpowers-zh skill
     const skillPath = path.join(superpowersSkillsDir, 'using-superpowers', 'SKILL.md');
     if (!fs.existsSync(skillPath)) return null;
 
     const fullContent = fs.readFileSync(skillPath, 'utf8');
     const { content } = extractAndStripFrontmatter(fullContent);
 
-    const toolMapping = `**Tool Mapping for OpenCode:**
-When skills reference tools you don't have, substitute OpenCode equivalents:
-- \`TodoWrite\` → \`update_plan\`
-- \`Task\` tool with subagents → Use OpenCode's subagent system (@mention)
-- \`Skill\` tool → OpenCode's native \`skill\` tool
-- \`Read\`, \`Write\`, \`Edit\`, \`Bash\` → Your native tools
-
-**Skills location:**
-Superpowers skills are in \`${configDir}/skills/superpowers/\`
-Use OpenCode's native \`skill\` tool to list and load skills.`;
+    const toolMapping = "**Tool Mapping for OpenCode:**\n" +
+"When skills reference tools you don't have, substitute OpenCode equivalents:\n" +
+"- `TodoWrite` -> `update_plan`\n" +
+"- `Task` tool with subagents -> Use OpenCode's subagent system (@mention)\n" +
+"- `Skill` tool -> OpenCode's native `skill` tool\n" +
+"- `Read`, `Write`, `Edit`, `Bash` -> Your native tools\n\n" +
+"**Skills location:**\n" +
+"Superpowers-zh skills are in `" + configDir + "/skills/superpowers-zh/` \n" +
+"Use OpenCode's native `skill` tool to list and load skills.";
 
     return `<EXTREMELY_IMPORTANT>
-You have superpowers.
+You have superpowers-zh.
 
-**IMPORTANT: The using-superpowers skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers" again - that would be redundant.**
+**IMPORTANT: The using-superpowers-zh skill content is included below. It is ALREADY LOADED - you are currently following it. Do NOT use the skill tool to load "using-superpowers-zh" again - that would be redundant.**
 
 ${content}
 

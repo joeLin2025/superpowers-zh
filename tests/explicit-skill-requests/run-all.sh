@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 # Run all explicit skill request tests
 # Usage: ./run-all.sh
 

@@ -1,4 +1,4 @@
----
+﻿---
 name: subagent-driven-development
 description: 当在当前会话中执行具有独立任务的实施计划时使用
 ---
@@ -59,7 +59,7 @@ digraph process {
     "Read plan, extract all tasks with full text, note context, create TodoWrite" [shape=box, label="读取计划，提取所有任务全文及上下文，创建 TodoWrite"];
     "More tasks remain?" [shape=diamond, label="还有任务吗？"];
     "Dispatch final code reviewer subagent for entire implementation" [shape=box, label="为整个实施分派最终代码审查者子智能体"];
-    "Use superpowers:finishing-a-development-branch" [shape=box, style=filled, fillcolor=lightgreen, label="使用 superpowers:finishing-a-development-branch"];
+    "Use superpowers-zh:finishing-a-development-branch" [shape=box, style=filled, fillcolor=lightgreen, label="使用 superpowers-zh:finishing-a-development-branch"];
 
     "Read plan, extract all tasks with full text, note context, create TodoWrite" -> "Dispatch implementer subagent (./implementer-prompt.md)";
     "Dispatch implementer subagent (./implementer-prompt.md)" -> "Implementer subagent asks questions?";
@@ -78,7 +78,7 @@ digraph process {
     "Mark task complete in TodoWrite" -> "More tasks remain?";
     "More tasks remain?" -> "Dispatch implementer subagent (./implementer-prompt.md)" [label="是"];
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="否"];
-    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:finishing-a-development-branch";
+    "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers-zh:finishing-a-development-branch";
 }
 ```
 
@@ -104,7 +104,7 @@ Task 1: Hook installation script
 
 Implementer: "在我开始之前 - 钩子应该安装在用户级别还是系统级别？"
 
-You: "User level (~/.config/superpowers/hooks/)"
+You: "User level (~/.config/superpowers-zh/hooks/)"
 
 Implementer: "Got it. Implementing now..."
 [Later] Implementer:
@@ -231,12 +231,12 @@ Done!
 ## 集成
 
 **必需的工作流技能:**
-- **superpowers:writing-plans** - 创建此技能执行的计划
-- **superpowers:requesting-code-review** - 审查者子智能体的代码审查模板
-- **superpowers:finishing-a-development-branch** - 所有任务后完成开发
+- **superpowers-zh:writing-plans** - 创建此技能执行的计划
+- **superpowers-zh:requesting-code-review** - 审查者子智能体的代码审查模板
+- **superpowers-zh:finishing-a-development-branch** - 所有任务后完成开发
 
 **子智能体应使用:**
-- **superpowers:test-driven-development** - 子智能体为每个任务遵循 TDD
+- **superpowers-zh:test-driven-development** - 子智能体为每个任务遵循 TDD
 
 **替代工作流:**
-- **superpowers:executing-plans** - 用于并行会话而非同一会话执行
+- **superpowers-zh:executing-plans** - 用于并行会话而非同一会话执行

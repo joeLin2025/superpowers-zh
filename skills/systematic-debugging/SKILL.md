@@ -1,4 +1,4 @@
----
+﻿---
 name: systematic-debugging
 description: 当遇到任何 Bug、测试失败或意外行为时，在提出修复方案之前使用
 ---
@@ -179,7 +179,7 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
    - 如果可能，自动化测试
    - 如果没有框架，一次性测试脚本
    - 修复前必须有
-   - 使用 `superpowers:test-driven-development` 技能编写正确的失败测试
+   - 使用 `superpowers-zh:test-driven-development` 技能编写正确的失败测试
 
 2. **实施单一修复**
    - 解决已识别的根本原因
@@ -287,8 +287,8 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 - **`condition-based-waiting.md`** - 用条件轮询替换任意超时
 
 **相关技能：**
-- **superpowers:test-driven-development** - 用于创建失败的测试用例（阶段 4，步骤 1）
-- **superpowers:verification-before-completion** - 在宣布成功前验证修复有效
+- **superpowers-zh:test-driven-development** - 用于创建失败的测试用例（阶段 4，步骤 1）
+- **superpowers-zh:verification-before-completion** - 在宣布成功前验证修复有效
 
 ## 现实世界影响
 

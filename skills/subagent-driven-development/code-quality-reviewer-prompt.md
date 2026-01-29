@@ -1,4 +1,4 @@
-# 代码质量审查者提示词模板 (Code Quality Reviewer Prompt Template)
+﻿# 代码质量审查者提示词模板 (Code Quality Reviewer Prompt Template)
 
 当分派代码质量审查者子智能体时使用此模板。
 
