@@ -73,6 +73,8 @@ skill-name-kebab-case/
 - **精神与字面**：添加“违反字面意思就是违反精神”。
 - **更多绘图规范**：见 [references/graphviz-conventions.dot](references/graphviz-conventions.dot)
 
+**新创建的技能说明文件（SKILL.md）必须包含高质量的中文翻译和说明，确保对中文语境下的 Agent 具有良好的引导性。**
+
 ---
 
 ## 第四阶段：交付与验证 (Delivery)

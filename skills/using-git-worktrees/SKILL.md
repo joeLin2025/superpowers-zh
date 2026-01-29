@@ -141,6 +141,8 @@ Tests passing (<N> tests, 0 failures)
 Ready to implement <feature-name>
 ```
 
+**在解释工作树目录选择、安装依赖过程、以及验证干净基线的结果时，必须使用自然、专业的中文。**
+
 ## 快速参考
 
 | 情况 | 行动 |

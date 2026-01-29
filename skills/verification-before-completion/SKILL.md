@@ -22,6 +22,8 @@ NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
 
 如果你没有在此消息中运行验证命令，你就不能声称它通过。
 
+**在陈述任何成功声称、展示验证证据、或解释验证失败原因时，必须使用自然、专业的中文。**
+
 ## 门控功能
 
 ```

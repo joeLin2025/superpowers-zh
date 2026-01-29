@@ -97,7 +97,7 @@ git commit -m "feat: add specific feature"
 - 带有预期输出的确切命令
 - 使用 @ 语法引用相关技能
 - DRY, YAGNI, TDD, 频繁提交
-- **所有描述性文字必须使用中文**
+- **所有描述性文字及对任务、架构和目标的说明必须使用高质量的中文。**
 
 ## 执行移交 (Execution Handoff)
 
