@@ -5,7 +5,7 @@ description: 当完成任务、实施主要功能或在合并之前使用，以�
 
 # 请求代码审查 (Requesting Code Review)
 
-分派 superpowers:code-reviewer 子智能体在问题级联之前捕捉它们。
+分派 `superpowers:code-reviewer` 子智能体在问题级联之前捕捉它们。该智能体的角色定义在 `./AGENT.md` 中。
 
 **核心原则：** 尽早审查，经常审查。
 
@@ -31,7 +31,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 **2. 分派 code-reviewer 子智能体:**
 
-使用 Task 工具并指定 superpowers:code-reviewer 类型，填充 `code-reviewer.md` 模板
+使用 Task 工具并指定 `superpowers:code-reviewer` 类型，填充 `code-reviewer.md` 任务模板。
 
 **占位符:**
 - `{WHAT_WAS_IMPLEMENTED}` - 你刚刚构建了什么
@@ -104,4 +104,4 @@ You: [修复进度指示器]
 - 展示证明其有效的代码/测试
 - 请求澄清
 
-参见模板：requesting-code-review/code-reviewer.md
+参见模板：./code-reviewer.md
