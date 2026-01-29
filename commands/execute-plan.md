@@ -1,5 +1,5 @@
 ---
-description: 带审查检查点的分批执行计划
+description: 带有架构师审查检查点的分批执行计划
 disable-model-invocation: true
 ---
 

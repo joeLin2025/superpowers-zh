@@ -1,5 +1,5 @@
 ---
-description: 创建带有一口大小任务的详细实施计划
+description: 创建带有任务清单的详细实施计划
 disable-model-invocation: true
 ---
 
