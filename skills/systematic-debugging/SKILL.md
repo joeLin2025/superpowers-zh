@@ -22,6 +22,8 @@ NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
 
 如果你没有完成第一阶段，你就不能提出修复方案。
 
+**调试过程中的假设分析、观察结果记录以及给用户的修复建议必须使用中文。**
+
 ## 何时使用
 
 用于任何技术问题：
