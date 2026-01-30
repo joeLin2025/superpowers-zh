@@ -66,6 +66,14 @@ digraph skill_flow {
 | "这感觉很有效率" | 无纪律的行动是浪费时间。技能防止这种情况。 |
 | "我知道那是什么意思" | 知道概念 ≠ 使用技能。调用它。 |
 
+## 编码安全 (Encoding Safety)
+
+在 Windows 环境下，**必须**遵循 `superpowers-zh:utf8-safe-file-handling` 技能。
+
+- 优先使用内置工具 (`read_file`, `write_file`, `replace`) 处理文本。
+- 严禁通过 Shell 重定向 (`>`) 写入包含中文的文件。
+- 确保所有生成或修改的文件均采用 **UTF-8 无 BOM** 编码。
+
 ## 技能优先级
 
 当多个技能可能适用时，使用此顺序：

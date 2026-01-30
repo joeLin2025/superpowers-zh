@@ -95,6 +95,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/superpowers
 **调试**
 - **systematic-debugging** - 4 阶段根本原因流程（包括根本原因追踪、深度防御、基于条件的等待技术）
 - **verification-before-completion** - 确保问题确实已修复
+- **utf8-safe-file-handling** - 强制 UTF-8 编码安全，防止 Windows 乱码
 
 **协作**
 - **brainstorming** - 苏格拉底式设计细化
