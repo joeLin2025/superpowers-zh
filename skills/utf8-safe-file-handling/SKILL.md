@@ -15,7 +15,7 @@ description: 当在 Windows 环境下读取、编写或处理包含中文等非 
 
 ### 1. 优先使用内置工具 (Built-in Tools First)
 - **读取**：必须使用 `read_file` 工具。**严禁**使用 `run_shell_command` 执行 `type`、`cat` 或 `Get-Content` 来查看包含中文的文件。
-- **写入**：必须使用 `write_file` 工具。它会自动以 UTF-8（无 BOM）编码保存文件。
+- **写入**：必须使用 `write_file` 工具。它会自动以 **UTF-8 No BOM** 编码保存文件，这是项目强制标准。
 - **修改**：必须使用 `replace` 工具。它在读取和写入时都会保持编码一致性。
 
 ### 2. 严禁 Shell 重定向写入 (No Shell Redirection)

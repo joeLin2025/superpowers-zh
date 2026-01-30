@@ -67,6 +67,9 @@ skill-name-kebab-case/
 ### 2. SKILL.md 规范结构
 - **YAML Frontmatter**：`name` 必须 kebab-case；`description` 只写“何时使用”，**严禁总结工作流**。
 - **正文建议章节**：目的、何时使用、流程/步骤、护栏与红旗、示例。
+- **编码与创建**：
+    - **必须**使用 `write_file` 工具创建文件（确保 UTF-8 No BOM）。
+    - **严禁**使用 PowerShell 重定向 (`>`) 或 `echo` 命令生成文件。
 
 ### 3. 抗合理化技巧 (Bulletproofing)
 - **明确否定**：不要只说“写测试”，要说“测试前写代码？删除它。”

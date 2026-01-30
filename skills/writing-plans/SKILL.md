@@ -17,7 +17,7 @@ description: 当你对多步任务有规范或需求时使用，在接触代码�
 
 **上下文：** 这应该在专用的工作树中运行（由 brainstorming 技能创建）。
 
-**保存计划至：** `docs/plans/YYYY-MM-DD-<feature-name>.md`
+**保存计划至：** `docs/plans/YYYY-MM-DD-<feature-name>.md` (**必须使用 `write_file` 工具以确保 UTF-8 No BOM 编码**)
 
 ## 一口大小的任务粒度 (Bite-Sized Task Granularity)
 

@@ -119,6 +119,25 @@ Fetch and follow instructions from https://raw.githubusercontent.com/superpowers
 - **降低复杂性 (Complexity reduction)** - 简单是首要目标
 - **证据胜于主张 (Evidence over claims)** - 在宣布成功前进行验证
 
+## 开发规范
+
+### 文件编码要求 (UTF-8 No BOM)
+
+为确保跨平台兼容性（Windows/Linux/macOS）及代码解析工具的稳定性，本项目强制要求所有文本文件（`.md`, `.js`, `.json`, `.sh`, `.ps1` 等）必须使用 **UTF-8 无 BOM (No BOM)** 格式。
+
+**严禁行为：**
+- 使用带 BOM 的 UTF-8 格式（常见于旧版 Windows 记事本或 PowerShell 重定向）。
+- 在 PowerShell 中使用 `>` 或 `>>` 重定向输出到文件（这通常会导致 BOM 或 UTF-16 编码）。请使用 `write_file` 工具或 Node.js 脚本替代。
+
+**检查与修复：**
+本项目提供了一个维护脚本，用于扫描并自动移除项目中的 BOM 标记：
+
+```bash
+node scripts/ensure-utf8.js
+```
+
+建议在提交代码前运行此脚本。
+
 ## 贡献
 
 技能直接位于此存储库中。要做出贡献：

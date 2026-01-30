@@ -38,6 +38,7 @@ description: "你必须在任何创造性工作之前使用此技能——创建
 
 **文档化:**
 - 将验证过的设计写入 `docs/plans/YYYY-MM-DD-<topic>-design.md`
+- **必须使用 `write_file` 工具以确保 UTF-8 No BOM 编码**。
 - **必须使用以下中文标题结构**:
     - `# 目标` (用于替换 `# Goal`)
     - `# 架构` (用于替换 `# Architecture`)
