@@ -1,4 +1,4 @@
-﻿---
+---
 name: writing-plans
 description: 当你对多步任务有规范或需求时使用，在接触代码之前
 ---

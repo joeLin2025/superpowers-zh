@@ -1,4 +1,4 @@
-﻿---
+---
 name: executing-plans
 description: 当你又书面的实施计划，需要在单独的会话中执行，并设有审查检查点时使用
 ---

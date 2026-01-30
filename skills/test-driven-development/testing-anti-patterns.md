@@ -1,4 +1,4 @@
-﻿# 测试反模式 (Testing Anti-Patterns)
+# 测试反模式 (Testing Anti-Patterns)
 
 **在以下情况加载此参考：** 编写或更改测试，添加模拟，或想向生产代码添加仅用于测试的方法时。
 

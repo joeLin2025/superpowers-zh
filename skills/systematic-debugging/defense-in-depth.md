@@ -1,4 +1,4 @@
-﻿# 纵深防御验证 (Defense-in-Depth Validation)
+# 纵深防御验证 (Defense-in-Depth Validation)
 
 ## 概述
 

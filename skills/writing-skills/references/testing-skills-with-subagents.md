@@ -1,4 +1,4 @@
-﻿# 用子代理测试技能 (Testing Skills With Subagents)
+# 用子代理测试技能 (Testing Skills With Subagents)
 
 **加载此参考：** 当创建或编辑技能时，在部署之前，以验证它们在压力下工作并抵制合理化。
 

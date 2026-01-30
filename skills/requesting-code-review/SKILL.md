@@ -1,4 +1,4 @@
-﻿---
+---
 name: requesting-code-review
 description: 当完成任务、实施主要功能或在合并之前使用，以验证工作是否符合要求
 ---

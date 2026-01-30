@@ -1,4 +1,4 @@
-﻿---
+---
 name: systematic-debugging
 description: 当遇到任何 Bug、测试失败或意外行为时，在提出修复方案之前使用
 ---

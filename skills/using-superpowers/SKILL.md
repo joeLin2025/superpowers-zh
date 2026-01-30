@@ -1,4 +1,4 @@
-﻿---
+---
 name: using-superpowers-zh
 description: 当开始任何对话时使用——建立如何查找和使用技能，要求在任何响应（包括澄清问题）之前调用 Skill 工具
 ---

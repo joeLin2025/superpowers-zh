@@ -1,4 +1,4 @@
-﻿# 技能编写最佳实践 (Skill authoring best practices)
+# 技能编写最佳实践 (Skill authoring best practices)
 
 > 学习如何编写 Claude 可以发现并成功使用的有效技能。
 
