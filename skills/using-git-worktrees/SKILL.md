@@ -1,81 +1,60 @@
 ---
 name: using-git-worktrees
-description: 当需要在不干扰当前工作区的情况下处理并行任务、修复紧急 Bug 或进行多版本对比测试时使用。
+description: 当需要在不干扰当前工作区的前提下，处理并发开发、紧急 Bug 修复或进行多版本基准对比时使用。
 ---
 
 # 使用 Git Worktrees (Using Git Worktrees)
 
 ## 概述
 
-Git Worktree 允许在同一仓库中同时检出多个分支到不同的物理目录，实现开发任务的物理级隔离，避免分支切换导致的构建缓存失效。
+Git Worktree 是一种实现“物理级任务隔离”的高级工作流。它允许在同一个仓库中同时检出多个分支到不同的文件目录，从而彻底解决 `git stash` 或 `git checkout` 导致的代码覆盖、构建缓存失效及 IDE 索引重置问题。
 
 **核心原则：**
-1.  **物理隔离**：每个分支拥有独立的工作目录和依赖环境。
-2.  **规范路径**：必须遵循统一的目录层级与命名规范。
-3.  **安全准入**：严禁将 Worktree 目录泄露到主仓库的 Git 追踪范围内。
-4.  **状态验证**：所有 Worktree 必须在通过基线测试后方可投入使用。
+1.  **物理隔离 (Physical Isolation)**：每个分支独占一个物理目录，确保构建产物和环境配置互不干扰。
+2.  **安全准入 (Security Gatekeeping)**：严禁在未被 `.gitignore` 覆盖的目录下创建 Worktree。防止污染主仓库的 Git 状态。
+3.  **基线确定性 (Baseline Certainty)**：新创建的 Worktree 必须在通过初始基线测试后方可标记为“可用”。
 
 ## 何时使用
 
-- **并行任务**：正在处理 Feature A 时，需要立即切换到分支 B 修复 Bug 或进行 PR 评审。
-- **环境对比**：需要同时运行两个不同版本的项目以对比行为差异。
-- **长时阻塞**：当前分支正在进行耗时编译或大型测试，需在另一分支继续编码。
-- **环境纯净度要求**：需要一套完全干净的依赖环境来复现特定 Bug。
-
-**何时不使用：**
-- 极小规模的代码调整（如仅修改一个常量）。
-- 宿主机磁盘空间极度匮乏。
+- **紧急热修复 (Hotfix)**：在 Feature 分支开发到一半时，需要立即切出干净环境修复生产 Bug。
+- **并发评审 (Concurrent Review)**：需要同时运行自己的代码和同事的 PR 分支进行交互测试。
+- **环境隔离复现**：需要一个完全不带任何本地未提交更改（Dirty state）的环境来复现特定故障。
+- **长时阻塞任务**：当前分支正在进行长达数十分钟的编译或大型集成测试，需在另一目录继续编码。
 
 ## 核心法则
 
-### 1. 目录管理 (Directory Management)
+### 1. 强制目录层级规范 (Path Hierarchy)
+**严禁**随意散落在磁盘各处。必须遵循以下路径决策算法：
+- **优先**：项目根目录下的 `.worktrees/`（必须已在 `.gitignore` 中注册）。
+- **备选**：用户家目录下的特定统一管理路径（如 `~/.config/gemini/worktrees/[project-name]/`）。
+- **动作**：创建前必须执行 `git check-ignore`。若路径未被忽略，**必须**先修改 `.gitignore` 并提交。
 
-**必须**按以下优先级确定 Worktree 的根路径，严禁随意散落在项目根目录：
-1.  **现有目录优先**：检测项目根目录下是否存在 `.worktrees` 或 `worktrees` 目录。若同时存在，**必须**使用 `.worktrees`。
-2.  **遵循项目约定**：检查 `GEMINI.md` 或 `CLAUDE.md` 中定义的 `worktree directory` 偏好（使用 `grep -i "worktree.*director" GEMINI.md`）。
-3.  **最终确认**：若无预设，**必须**询问用户选择 `.worktrees/` (项目本地) 或 `~/.config/gemini/worktrees/<项目名>/` (全局路径)。
+### 2. 原子化创建与初始化 (Creation & Init)
+创建动作必须包含以下闭环步骤：
+1.  **检出**：执行 `git worktree add [path] -b [branch-name]`。
+2.  **环境同步**：进入目录后，**无条件执行**依赖安装命令（如 `npm i`, `pip install`, `go mod download`）。
+3.  **基线验证**：运行项目的冒烟测试或主干测试。若初始化测试失败，**立即停止**并删除该 Worktree，严禁在故障基线上开发。
 
-### 2. 隔离性与安全验证
+### 3. 分支互斥律 (Branch Mutex)
+- **铁律**：严禁两个 Worktree 同时挂载同一个分支。
+- **动作**：创建前使用 `git worktree list` 检查目标分支是否已被占用。
 
-**必须**验证目录隔离的安全性：
-- **忽略状态校验**：在项目子目录下创建 Worktree 前，**必须**执行 `git check-ignore -q <路径>`。若未被忽略，**必须**先将路径写入 `.gitignore` 并提交。
-- **命名一致性**：Worktree 的文件夹名称**必须**与分支名保持完全一致。
-
-### 3. 环境与基线自动化
-
-创建 Worktree (`git worktree add <路径> -b <分支>`) 后，**必须**执行初始化：
-- **依赖安装**：根据项目类型自动执行 `npm install`、`cargo build`、`go mod download` 或 `poetry install`。
-- **基线验证**：**必须**运行项目主干测试（如 `npm test`）。若初始测试未通过，**必须**停止操作并报告，严禁在故障基线上进行任何开发。
+### 4. 彻底清理协议 (Cleanup Protocol)
+任务完成后，**必须**通过 Git 命令而非手动删除文件夹：
+- **命令**：`git worktree remove [path]`。
+- **目的**：确保 Git 内部索引（Index）得到正确清理，防止产生“僵尸 Worktree”。
 
 ## 借口粉碎机 (Excuse Smasher)
 
 | 借口 | 事实反击 |
 |------|----------|
-| “用 `git stash` 切换分支更简单” | Stash 无法保留 `node_modules` 或构建产物。Worktree 切换是瞬时的，且互不干扰。 |
-| “我手动创建文件夹就行，不用这个流程” | 手动管理会导致路径混乱和忽略规则失效。规范化的目录管理是防止系统垃圾堆积的唯一手段。 |
-| “忽略验证太麻烦了，我保证不提交” | 只要目录未被忽略，`git status` 就会被污染，误提交只是时间问题。 |
-| “环境初始化太慢，我等下再弄” | 缺少依赖的环境会产生大量的伪报错，反而极大降低开发效率。 |
+| “我用 Stash 很快就能切过去” | Stash 不会隔离 `node_modules` 和二进制产物。大型项目中，重新编译的时间远超创建 Worktree 的时间。 |
+| “磁盘空间不够了” | 一个 Worktree 共享同一个 `.git` 对象库，额外的空间仅为源码和依赖。若空间不足，说明需要清理旧的 Worktree 而非放弃该流程。 |
+| “我手动删了文件夹，Git 报错了” | 这就是为什么必须使用 `git worktree remove`。手动删除会破坏 Git 内部状态，必须通过 `git worktree prune` 来修复。 |
 
 ## 危险信号 (Red Flags)
 
-- **目录污染**：在项目目录下创建了未被 `.gitignore` 覆盖的 Worktree -> **立即停止并修正忽略规则**。
-- **基线故障**：在基线测试失败的情况下直接开始新功能开发 -> **立即停止并报告故障**。
-- **命名冲突**：Worktree 目录名与分支名不一致 -> **立即删除并重新按规范创建**。
-- **盲目操作**：未确认目录位置优先级便随意创建文件夹 -> **立即撤销并遵循优先级流程**。
-
-## 常用操作参考
-
-```bash
-# 1. 检查忽略状态
-git check-ignore -v .worktrees/
-
-# 2. 安全创建并切换
-git worktree add .worktrees/feat-api -b feat-api
-cd .worktrees/feat-api
-
-# 3. 环境初始化示例 (Node)
-npm install && npm test
-
-# 4. 彻底清理
-git worktree remove <路径>
-```
+- **目录污染**：执行 `git status` 时看到了 `.worktrees/` 目录下的文件。
+- **基线未验证**：创建了 Worktree 后直接开始写逻辑，而没有确认当前环境是否能跑通测试。
+- **路径随意性**：Worktree 被创建在了 `Downloads/` 或 `Desktop/` 等非规范路径。
+- **手动管理风险**：通过直接 `rm -rf` 文件夹来清理 Worktree。
