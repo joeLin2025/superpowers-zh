@@ -34,13 +34,35 @@ description: 当需要进行新功能开发、架构设计、重构或解决模�
 - **方案 B (替代/激进/保守方案)**：如“不作为”、“极简实现”或“彻底重写”。
 - **必须**使用表格对比两者的：**实现难度、维护成本、性能影响、风险点**。
 
-### 3. 必须产出标准规格说明书 (Spec Materialization)
+### 3. 必须产出标准规格说明书 (Spec Output Standard)
 脑暴的结论**必须**持久化为 `docs/specs/[YYYY-MM-DD]-[task-name].md`。
-**Spec 文档必须包含以下“军规级”结构：**
-- **目标与非目标 (Goals & Non-Goals)**：明确定义“做什么”和“绝对不做什么”，防止范围蔓延（Scope Creep）。
-- **受影响范围 (Impacted Scope)**：明确列出所有将被修改的文件路径。
-- **核心逻辑流**：使用伪代码或 Mermaid 流程图描述关键算法。
-- **破坏性更改声明 (Breaking Changes)**：若涉及 API 或配置变动，必须显式加粗说明。
+若目录不存在，必须使用 `run_shell_command` 创建 `mkdir -p docs/specs`。
+
+**Spec 文档必须严格遵守以下 Schema：**
+
+```markdown
+# [Spec Title]
+
+## 1. 背景与目标 (Context & Goals)
+- **痛点**: [描述当前问题]
+- **目标**: [定义成功的标准]
+- **非目标 (Non-Goals)**: [明确不做的范围，防止蔓延]
+
+## 2. 核心设计 (Core Design)
+- **API 变更**: [函数签名 / 接口定义]
+- **数据结构**: [Schema / Model 变更]
+- **逻辑流**: [伪代码 / Mermaid 流程图]
+
+## 3. 方案权衡 (Trade-offs)
+| 维度 | 方案 A (推荐) | 方案 B (替代) |
+| :--- | :--- | :--- |
+| 复杂度 | 低 | 高 |
+| 风险 | 无 | 可能破坏旧数据 |
+
+## 4. 风险与副作用 (Risks & Side Effects)
+- **受影响文件**: [必须列出具体文件路径]
+- **破坏性变更**: [是否需要迁移数据？是否破坏 Public API？]
+```
 
 ### 4. 严禁越权进入实施阶段 (No Implementation Leakage)
 - **严禁**在脑暴阶段产出 `Writing-Plans` 级别的细粒度步骤。
