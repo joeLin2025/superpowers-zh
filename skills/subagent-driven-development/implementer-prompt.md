@@ -20,12 +20,24 @@
 4.  **深度自省 (Self-Review)**：
     -   我是否遗漏了任何需求？
     -   我是否引入了冗余代码？
-    -   变量命名是否具备语义化？
 
-## 4. 交付协议 (Reporting Format)
+## 4. 交付协议 (Report Output Standard)
 
-完成后，你**必须**使用中文提交报告：
-- **修改详情**：[文件名] [行号范围] [改动逻辑]
-- **验证证据**：[粘贴具体的测试成功日志片段]
-- **遗留问题**：[有哪些边缘情况尚未处理？有哪些潜在风险？]
-- **声明**：我已执行自检，确认代码符合项目现有的整洁代码规范。
+完成后，你**必须**使用以下 JSON 风格的 Markdown 块提交报告（严禁散文）：
+
+```json
+{
+  "status": "SUCCESS", // 或 "FAILURE"
+  "files_changed": [
+    "path/to/file1.ts",
+    "path/to/test_file1.ts"
+  ],
+  "verification_evidence": "粘贴关键的测试成功日志片段（如：Passed: 5, Failed: 0）",
+  "self_review": {
+    "requirements_covered": true,
+    "clean_code_verified": true,
+    "edge_cases_handled": "描述已处理的边缘情况"
+  },
+  "notes": "任何需要主智能体注意的风险或说明"
+}
+```
