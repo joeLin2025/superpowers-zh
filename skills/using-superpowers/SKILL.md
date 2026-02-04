@@ -1,97 +1,93 @@
 ---
-name: using-superpowers-zh
-description: 当开始任何对话时使用——建立如何查找和使用技能，要求在任何响应（包括澄清问题）之前调用 Skill 工具
+name: using-superpowers
+description: 在开始任何对话时使用 - 建立如何查找和使用技能的规则，要求在做出任何响应（包括澄清问题）之前必须激活相关技能。
 ---
 
 <EXTREMELY-IMPORTANT>
-如果你认为即使有 1% 的机会某个技能可能适用于你正在做的事情，你也**绝对必须**调用该技能。
+如果你认为即使有 1% 的可能性某个技能适用于你正在执行的任务，你都**必须**激活该技能。
 
-如果一项技能适用于你的任务，你没有选择。你必须使用它。
+如果某个技能适用于你的任务，你没有选择余地。你**必须**使用它。
 
-这是不可协商的。这不是可选的。你不能通过合理化来逃避这一点。
+这不是可协商的。这不是可选的。你不能找借口规避这一点。
 </EXTREMELY-IMPORTANT>
 
-## 如何访问技能
+# 使用超能力 (Using Superpowers)
 
-**在 Claude Code 中：** 使用 `Skill` 工具。当你调用一个技能时，它的内容会被加载并展示给你——直接遵循它。永远不要对技能文件使用 Read 工具。
+## 概述
 
-**在其他环境中：** 查看你的平台文档以了解如何加载技能。
+此技能是 Gemini CLI 的元技能（Meta-Skill），负责强制执行技能优先的工作流。它建立了“技能是行动的唯一合法依据”的绝对规则。
 
-# 使用技能
+**核心原则：**
+1.  **技能优先 (Skill First)**：任何行动前，必须先激活对应技能。
+2.  **强制激活 (Mandatory Activation)**：即使你觉得自己记得内容，也必须调用 `activate_skill`。
+3.  **流程就是法律 (Process is Law)**：一旦技能激活，其内部流程必须被严格执行，不得跳过。
 
-## 规则
+## 何时使用
 
-**在任何响应或行动之前调用相关或请求的技能。** 即使只有 1% 的机会技能可能适用，也意味着你应该调用该技能进行检查。如果调用的技能结果不适合当前情况，你不需要使用它。
+- **每一次**对话开始时。
+- **每一次**收到用户新指令时。
+- **每一次**你准备执行某项任务（写代码、修 Bug、做设计）时。
 
-**在引导用户使用其他技能或进行状态确认时，必须使用自然、专业的中文。**
+## 核心法则
+
+### 1. 必须进行技能检查
+
+在做出任何实质性响应或调用工具之前，**必须**执行以下逻辑检查：
+1.  分析用户意图（如“修复 Bug”）。
+2.  扫描可用技能列表（如 `systematic-debugging`）。
+3.  **激活**最相关的技能。
+
+### 2. 严禁凭记忆行事
+
+- **严禁**因为“我记得这个技能怎么说”而不去激活它。
+- 技能文件可能会更新。**必须**始终加载最新版本。
+- 激活不仅仅是为了读取内容，更是为了向用户宣告你的操作模式。
+
+### 3. 必须遵循流程图
 
 ```dot
 digraph skill_flow {
-    "User message received" [shape=doublecircle, label="收到用户消息"];
-    "Might any skill apply?" [shape=diamond, label="有技能适用吗？"];
-    "Invoke Skill tool" [shape=box, label="调用 Skill 工具"];
-    "Announce: 'Using [skill] to [purpose]'" [shape=box, label="宣布：'使用 [技能] 来 [目的]'"];
-    "Has checklist?" [shape=diamond, label="有清单吗？"];
-    "Create TodoWrite todo per item" [shape=box, label="为每项创建 TodoWrite 待办"];
-    "Follow skill exactly" [shape=box, label="严格遵循技能"];
-    "Respond (including clarifications)" [shape=doublecircle, label="响应 (包括澄清)"];
+    "收到用户消息" [shape=doublecircle];
+    "是否有技能适用？" [shape=diamond];
+    "调用 activate_skill 工具" [shape=box];
+    "宣布：'正在使用 [技能名称] 来 [目的]'" [shape=box];
+    "是否有检查清单？" [shape=diamond];
+    "为每个条目创建待办事项" [shape=box];
+    "严格遵守技能说明" [shape=box];
+    "做出响应（包括澄清）" [shape=doublecircle];
 
-    "User message received" -> "Might any skill apply?";
-    "Might any skill apply?" -> "Invoke Skill tool" [label="是的，哪怕 1%"];
-    "Might any skill apply?" -> "Respond (including clarifications)" [label="绝对不是"];
-    "Invoke Skill tool" -> "Announce: 'Using [skill] to [purpose]'";
-    "Announce: 'Using [skill] to [purpose]'" -> "Has checklist?";
-    "Has checklist?" -> "Create TodoWrite todo per item" [label="是"];
-    "Has checklist?" -> "Follow skill exactly" [label="否"];
-    "Create TodoWrite todo per item" -> "Follow skill exactly";
+    "收到用户消息" -> "是否有技能适用？";
+    "是否有技能适用？" -> "调用 activate_skill 工具" [label="是，即使只有 1%"];
+    "是否有技能适用？" -> "做出响应（包括澄清）" [label="绝对没有"];
+    "调用 activate_skill 工具" -> "宣布：'正在使用 [技能名称] 来 [目的]'";
+    "宣布：'正在使用 [技能名称] 来 [目的]'" -> "是否有检查清单？";
+    "是否有检查清单？" -> "为每个条目创建待办事项" [label="是"];
+    "是否有检查清单？" -> "严格遵守技能说明" [label="否"];
+    "为每个条目创建待办事项" -> "严格遵守技能说明";
 }
 ```
 
-## 危险信号
+### 4. 优先级仲裁
 
-这些想法意味着**停止**——你在进行合理化（找借口）：
+当多个技能适用时，**必须**按此顺序激活：
+1.  **流程类技能** (如 `brainstorming`, `systematic-debugging`) - **必须**先确定“怎么做”。
+2.  **实施类技能** (如 `writing-plans`, `test-driven-development`) - 指导具体的执行。
 
-| 想法 | 现实 |
-|---------|---------|
-| "这只是一个简单的问题" | 问题就是任务。检查技能。 |
-| "我先需要更多上下文" | 技能检查在澄清问题**之前**。 |
-| "让我先探索一下代码库" | 技能会告诉你**如何**探索。先检查。 |
-| "我可以快速检查 git/文件" | 文件缺乏对话上下文。检查技能。 |
-| "让我先收集信息" | 技能会告诉你**如何**收集信息。 |
-| "这不需要正式的技能" | 如果有技能存在，使用它。 |
-| "我记得这个技能" | 技能在进化。阅读当前版本。 |
-| "这不算是一个任务" | 行动 = 任务。检查技能。 |
-| "这技能有点大材小用" | 简单的事情会变复杂。使用它。 |
-| "我先做这一件事" | 在做任何事**之前**先检查。 |
-| "这感觉很有效率" | 无纪律的行动是浪费时间。技能防止这种情况。 |
-| "我知道那是什么意思" | 知道概念 ≠ 使用技能。调用它。 |
+## 借口粉碎机 (Excuse Smasher)
 
-## 编码安全 (Encoding Safety)
+| 借口 | 事实反击 |
+|------|----------|
+| “这只是个简单的问题，不用激活技能” | 简单的问题最容易因为轻视而出错。技能是防止自大的安全带。 |
+| “我需要先了解更多背景信息” | 技能检查必须在提出澄清问题之前进行。技能会告诉你该问什么。 |
+| “我可以快速检查一下 git/文件” | 文件缺乏对话背景。技能会指导你如何正确地探索。 |
+| “这不需要正式的技能” | 如果存在相关技能，就必须使用它。这是纪律问题。 |
+| “这样做感觉很有成效” | 无纪律的行动是低效的忙碌。技能将行动转化为结果。 |
 
-在 Windows 环境下，**必须**遵循 `superpowers-zh:utf8-safe-file-handling` 技能。
+## 危险信号 (Red Flags)
 
-- 优先使用内置工具 (`read_file`, `write_file`, `replace`) 处理文本。
-- 严禁通过 Shell 重定向 (`>`) 写入包含中文的文件。
-- 确保所有生成或修改的文件均采用 **UTF-8 无 BOM** 编码。
+如果出现以下情况，**立即停止**并自我纠正：
 
-## 技能优先级
-
-当多个技能可能适用时，使用此顺序：
-
-1. **流程技能优先** (brainstorming, debugging) - 这些决定了**如何**处理任务
-2. **实施技能次之** (frontend-design, mcp-builder) - 这些指导执行
-
-"让我们构建 X" → 先 `brainstorming`，然后是实施技能。
-"修复这个 Bug" → 先 `debugging`，然后是特定领域的技能。
-
-## 技能类型
-
-**刚性 (Rigid)** (TDD, debugging): 严格遵循。不要因适应而放弃纪律。
-
-**灵活 (Flexible)** (patterns): 将原则适应于上下文。
-
-技能本身会告诉你属于哪一种。
-
-## 用户指令
-
-指令说的是**做什么 (WHAT)**，而不是**怎么做 (HOW)**。“添加 X”或“修复 Y”并不意味着跳过工作流。
+- 你直接回答了用户的问题，而没有先调用 `activate_skill`。
+- 你在回复中说“根据我的知识库...”，而不是“根据已激活的 [技能名]...”。
+- 用户问“怎么修这个 Bug”，你直接给出了代码，而不是激活 `systematic-debugging`。
+- 你认为“这次例外”。 -> **永远没有例外。**

@@ -1,4 +1,19 @@
-.worktrees/
-.private-journal/
-.claude/
-.idea/
+# macOS
+.DS_Store
+
+# IDEs
+.idea
+.vscode/
+*.swp
+*.swo
+
+# Temporary files
+*.log
+tmp/
+temp/
+
+# Project specific
+# Note: specs and plans are usually committed in this project to track design/progress
+# but you can uncomment them if you prefer to keep them local.
+docs/specs/
+docs/plans/

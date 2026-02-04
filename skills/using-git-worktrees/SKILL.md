@@ -1,219 +1,81 @@
 ---
 name: using-git-worktrees
-description: 当开始需要与当前工作区隔离的功能工作，或在执行实施计划之前使用——通过智能目录选择和安全验证创建隔离的 git 工作树
+description: 当需要在不干扰当前工作区的情况下处理并行任务、修复紧急 Bug 或进行多版本对比测试时使用。
 ---
 
-# 使用 Git 工作树 (Using Git Worktrees)
+# 使用 Git Worktrees (Using Git Worktrees)
 
 ## 概述
 
-Git 工作树创建共享同一仓库的隔离工作区，允许同时在多个分支上工作而无需切换。
+Git Worktree 允许在同一仓库中同时检出多个分支到不同的物理目录，实现开发任务的物理级隔离，避免分支切换导致的构建缓存失效。
 
-**核心原则：** 系统目录选择 + 安全验证 = 可靠隔离。
+**核心原则：**
+1.  **物理隔离**：每个分支拥有独立的工作目录和依赖环境。
+2.  **规范路径**：必须遵循统一的目录层级与命名规范。
+3.  **安全准入**：严禁将 Worktree 目录泄露到主仓库的 Git 追踪范围内。
+4.  **状态验证**：所有 Worktree 必须在通过基线测试后方可投入使用。
 
-**开始时宣布：** "我正在使用 using-git-worktrees 技能来设置隔离的工作区。"
+## 何时使用
 
-## 目录选择流程
+- **并行任务**：正在处理 Feature A 时，需要立即切换到分支 B 修复 Bug 或进行 PR 评审。
+- **环境对比**：需要同时运行两个不同版本的项目以对比行为差异。
+- **长时阻塞**：当前分支正在进行耗时编译或大型测试，需在另一分支继续编码。
+- **环境纯净度要求**：需要一套完全干净的依赖环境来复现特定 Bug。
 
-遵循此优先顺序：
+**何时不使用：**
+- 极小规模的代码调整（如仅修改一个常量）。
+- 宿主机磁盘空间极度匮乏。
 
-### 1. 检查现有目录
+## 核心法则
 
-```bash
-# 按优先级顺序检查
-ls -d .worktrees 2>/dev/null     # 优先 (隐藏)
-ls -d worktrees 2>/dev/null      # 替代
-```
+### 1. 目录管理 (Directory Management)
 
-**如果找到：** 使用该目录。如果两者都存在，`.worktrees` 胜出。
+**必须**按以下优先级确定 Worktree 的根路径，严禁随意散落在项目根目录：
+1.  **现有目录优先**：检测项目根目录下是否存在 `.worktrees` 或 `worktrees` 目录。若同时存在，**必须**使用 `.worktrees`。
+2.  **遵循项目约定**：检查 `GEMINI.md` 或 `CLAUDE.md` 中定义的 `worktree directory` 偏好（使用 `grep -i "worktree.*director" GEMINI.md`）。
+3.  **最终确认**：若无预设，**必须**询问用户选择 `.worktrees/` (项目本地) 或 `~/.config/gemini/worktrees/<项目名>/` (全局路径)。
 
-### 2. 检查 CLAUDE.md
+### 2. 隔离性与安全验证
 
-```bash
-grep -i "worktree.*director" CLAUDE.md 2>/dev/null
-```
+**必须**验证目录隔离的安全性：
+- **忽略状态校验**：在项目子目录下创建 Worktree 前，**必须**执行 `git check-ignore -q <路径>`。若未被忽略，**必须**先将路径写入 `.gitignore` 并提交。
+- **命名一致性**：Worktree 的文件夹名称**必须**与分支名保持完全一致。
 
-**如果指定了偏好：** 不询问直接使用。
+### 3. 环境与基线自动化
 
-### 3. 询问用户
+创建 Worktree (`git worktree add <路径> -b <分支>`) 后，**必须**执行初始化：
+- **依赖安装**：根据项目类型自动执行 `npm install`、`cargo build`、`go mod download` 或 `poetry install`。
+- **基线验证**：**必须**运行项目主干测试（如 `npm test`）。若初始测试未通过，**必须**停止操作并报告，严禁在故障基线上进行任何开发。
 
-如果没有目录存在且无 CLAUDE.md 偏好：
+## 借口粉碎机 (Excuse Smasher)
 
-```
-No worktree directory found. Where should I create worktrees?
-
-1. .worktrees/ (project-local, hidden)
-2. ~/.config/superpowers-zh/worktrees/<project-name>/ (global location)
-
-Which would you prefer?
-```
-
-## 安全验证
-
-### 对于项目本地目录 (.worktrees 或 worktrees)
-
-**创建工作树前必须验证目录被忽略：**
-
-```bash
-# 检查目录是否被忽略 (尊重本地、全局和系统 gitignore)
-git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
-```
-
-**如果未忽略：**
-
-根据 Superpowers-zh 准则“立即修复损坏的东西”：
-1. 向 .gitignore 添加适当的行
-2. 提交更改
-3. 继续创建工作树
-
-**为何关键：** 防止意外将工作树内容提交到仓库。
-
-### 对于全局目录 (~/.config/superpowers-zh/worktrees)
-
-不需要 .gitignore 验证 - 完全在项目之外。
-
-## 创建步骤
-
-### 1. 检测项目名称
-
-```bash
-project=$(basename "$(git rev-parse --show-toplevel)")
-```
-
-### 2. 创建工作树
-
-```bash
-# 确定完整路径
-case $LOCATION in
-  .worktrees|worktrees)
-    path="$LOCATION/$BRANCH_NAME"
-    ;;
-  ~/.config/superpowers-zh/worktrees/*)
-    path="~/.config/superpowers-zh/worktrees/$project/$BRANCH_NAME"
-    ;;
-esac
-
-# 创建带有新分支的工作树
-git worktree add "$path" -b "$BRANCH_NAME"
-cd "$path"
-```
-
-### 3. 运行项目设置
-
-自动检测并运行适当的设置：
-
-```bash
-# Node.js
-if [ -f package.json ]; then npm install; fi
-
-# Rust
-if [ -f Cargo.toml ]; then cargo build; fi
-
-# Python
-if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-if [ -f pyproject.toml ]; then poetry install; fi
-
-# Go
-if [ -f go.mod ]; then go mod download; fi
-```
-
-### 4. 验证干净基线
-
-运行测试以确保工作树干净启动：
-
-```bash
-# 示例 - 使用适合项目的命令
-npm test
-cargo test
-pytest
-go test ./...
-```
-
-**如果测试失败：** 报告失败，询问是否继续或调查。
-
-**如果测试通过：** 报告就绪。
-
-### 5. 报告位置
-
-```
-Worktree ready at <full-path>
-Tests passing (<N> tests, 0 failures)
-Ready to implement <feature-name>
-```
-
-**在解释工作树目录选择、安装依赖过程、以及验证干净基线的结果时，必须使用自然、专业的中文。**
-
-## 快速参考
-
-| 情况 | 行动 |
-|-----------|--------|
-| `.worktrees/` 存在 | 使用它（验证已忽略） |
-| `worktrees/` 存在 | 使用它（验证已忽略） |
-| 两者都存在 | 使用 `.worktrees/` |
-| 都不存在 | 检查 CLAUDE.md → 询问用户 |
-| 目录未被忽略 | 添加到 .gitignore + 提交 |
-| 基线期间测试失败 | 报告失败 + 询问 |
-| 无 package.json/Cargo.toml | 跳过依赖安装 |
-
-## 常见错误
-
-### 跳过忽略验证
-
-- **问题：** 工作树内容被跟踪，污染 git 状态
-- **修复：** 创建项目本地工作树前始终使用 `git check-ignore`
-
-### 假设目录位置
-
-- **问题：** 造成不一致，违反项目惯例
-- **修复：** 遵循优先级：现有 > CLAUDE.md > 询问
-
-### 带着失败的测试继续
-
-- **问题：** 无法区分新 Bug 和现有问题
-- **修复：** 报告失败，获得明确许可才继续
-
-### 硬编码设置命令
-
-- **问题：** 在使用不同工具的项目上中断
-- **修复：** 从项目文件 (package.json 等) 自动检测
-
-## 示例工作流
-
-```
-You: 我正在使用 using-git-worktrees 技能来设置隔离的工作区。
-
-[检查 .worktrees/ - 存在]
-[验证已忽略 - git check-ignore 确认 .worktrees/ 被忽略]
-[创建工作树: git worktree add .worktrees/auth -b feature/auth]
-[运行 npm install]
-[运行 npm test - 47 passing]
-
-Worktree ready at /Users/user/myproject/.worktrees/auth
-Tests passing (47 tests, 0 failures)
-Ready to implement auth feature
-```
+| 借口 | 事实反击 |
+|------|----------|
+| “用 `git stash` 切换分支更简单” | Stash 无法保留 `node_modules` 或构建产物。Worktree 切换是瞬时的，且互不干扰。 |
+| “我手动创建文件夹就行，不用这个流程” | 手动管理会导致路径混乱和忽略规则失效。规范化的目录管理是防止系统垃圾堆积的唯一手段。 |
+| “忽略验证太麻烦了，我保证不提交” | 只要目录未被忽略，`git status` 就会被污染，误提交只是时间问题。 |
+| “环境初始化太慢，我等下再弄” | 缺少依赖的环境会产生大量的伪报错，反而极大降低开发效率。 |
 
 ## 危险信号 (Red Flags)
 
-**绝不:**
-- 未验证被忽略就创建工作树（项目本地）
-- 跳过基线测试验证
-- 不询问就带着失败的测试继续
-- 模棱两可时假设目录位置
-- 跳过 CLAUDE.md 检查
+- **目录污染**：在项目目录下创建了未被 `.gitignore` 覆盖的 Worktree -> **立即停止并修正忽略规则**。
+- **基线故障**：在基线测试失败的情况下直接开始新功能开发 -> **立即停止并报告故障**。
+- **命名冲突**：Worktree 目录名与分支名不一致 -> **立即删除并重新按规范创建**。
+- **盲目操作**：未确认目录位置优先级便随意创建文件夹 -> **立即撤销并遵循优先级流程**。
 
-**始终:**
-- 遵循目录优先级：现有 > CLAUDE.md > 询问
-- 为项目本地验证目录被忽略
-- 自动检测并运行项目设置
-- 验证干净的测试基线
+## 常用操作参考
 
-## 集成
+```bash
+# 1. 检查忽略状态
+git check-ignore -v .worktrees/
 
-**调用者:**
-- **brainstorming** (第 4 阶段) - 必需，当设计获批且实施随之而来时
-- 任何需要隔离工作区的技能
+# 2. 安全创建并切换
+git worktree add .worktrees/feat-api -b feat-api
+cd .worktrees/feat-api
 
-**配合:**
-- **finishing-a-development-branch** - 必需，用于工作完成后的清理
-- **executing-plans** 或 **subagent-driven-development** - 工作在此工作树中发生
+# 3. 环境初始化示例 (Node)
+npm install && npm test
+
+# 4. 彻底清理
+git worktree remove <路径>
+```
