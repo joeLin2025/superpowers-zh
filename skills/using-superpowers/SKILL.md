@@ -3,14 +3,6 @@ name: using-superpowers
 description: 在开始任何对话、接收新指令或准备执行任务前使用，确立“技能驱动”的元规则，强制要求激活对应的专家模式。
 ---
 
-<EXTREMELY-IMPORTANT>
-如果你认为即使有 1% 的可能性某个技能适用于你正在执行的任务，你都**必须**激活该技能。
-
-如果某个技能适用于你的任务，你没有选择余地。你**必须**使用它。
-
-这不是可协商的。这不是可选的。你不能找借口规避这一点。
-</EXTREMELY-IMPORTANT>
-
 # 使用超能力 (Using Superpowers)
 
 ## 概述
@@ -35,10 +27,11 @@ description: 在开始任何对话、接收新指令或准备执行任务前使�
 在做出任何实质性响应前，**必须**进行逻辑判定：
 - **意图扫描**：分析用户是要“修 Bug”、“做新功能”还是“检查工作”？
 - **匹配路由**：
-    - `bug / 报错 / 修复` -> `systematic-debugging`
+    - `bug / error / 报错 / 修复` -> `systematic-debugging`
     - `新需求 / 怎么做 / 架构` -> `brainstorming`
     - `实施 / 写代码 / 计划` -> `writing-plans` + `executing-plans`
     - `完成 / 检查 / 合并` -> `verification-before-completion`
+    - `优化技能 / 编写规范` -> `skill-localization-and-polishing`
 
 ### 2. 必须执行显式“专家宣誓”
 激活技能后，**必须**以中文宣布：
@@ -48,7 +41,7 @@ description: 在开始任何对话、接收新指令或准备执行任务前使�
 ### 3. 必须遵循“技能仲裁”优先级
 当多个技能适用时，按以下顺序激活：
 1.  **方法论技能** (如 `brainstorming`, `systematic-debugging`)：先确定“如何想”。
-2.  **执行性技能** (如 `writing-plans`, `TDD`)：再确定“如何做”。
+2.  **执行性技能** (如 `writing-plans`, `test-driven-development`)：再确定“如何做”。
 3.  **验证性技能** (如 `verification-before-completion`)：最后确定“如何验”。
 
 ### 4. 严禁“闲聊模式”回归
@@ -64,6 +57,7 @@ description: 在开始任何对话、接收新指令或准备执行任务前使�
 | “我需要先问清楚需求再激活” | 技能文档会告诉你该问什么。激活必须先于澄清。 |
 | “我可以直接读取文件，效率更高” | 效率不等同于质量。缺乏流程的快速执行通常意味着在生产环境制造隐患。 |
 | “我已经在之前的对话里激活过了” | 技能状态会衰减。新的一轮任务必须重新激活以对齐认知。 |
+| “我记得技能内容，不用再调一次工具” | 记忆是模糊的，工具调用是确定的。调用 `activate_skill` 是对用户负责的体现。 |
 
 ## 危险信号 (Red Flags)
 
