@@ -30,10 +30,36 @@ description: 当需要产出中文友好的 UX 交互原型、Mockup 或验证�
 - **Happy Path**：最顺畅的操作链路是什么？
 - **动作**：通过提问确认是否存在“返回”、“取消”或“异常报错”等分支路径。
 
-### 2. 必须严守“单文件”技术架构
-- **技术栈**：HTML5 + Tailwind CSS (via CDN) + Vanilla JavaScript。
-- **模板约束**：必须包含 `<meta charset="UTF-8">` 和 `<title>`。
-- **互动性**：使用原生 JS 操作 DOM 的 `hidden` 属性或 `classList` 来切换 Tab、显示 Modal 或模拟加载状态。
+### 2. 必须严守“单文件”输出规范 (Output Standard)
+产出的文件必须符合以下结构，严禁变体：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN"> <!-- 强制中文 -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[原型名称]</title>
+    <!-- 强制使用 CDN，严禁本地 build -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: '#2563eb' } } }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <!-- 必须使用语义化标签 -->
+    <main class="max-w-md mx-auto min-h-screen bg-white shadow-lg">
+        <!-- 业务内容 -->
+    </main>
+    <script>
+        // 必须模拟核心交互
+        // document.getElementById('btn').addEventListener(...)
+    </script>
+</body>
+</html>
+```
 
 ### 3. 必须遵循“中文友好”设计规范
 - **字体栈**：优先使用 `font-sans` 并补齐 `PingFang SC`, `Microsoft YaHei`。
