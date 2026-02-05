@@ -15,5 +15,3 @@ temp/
 # Project specific
 # Note: specs and plans are usually committed in this project to track design/progress
 # but you can uncomment them if you prefer to keep them local.
-docs/specs/
-docs/plans/
