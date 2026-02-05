@@ -1,86 +1,76 @@
----
+﻿---
 name: ux-prototyping
 description: 当需要产出中文友好的 UX 交互原型、Mockup 或验证业务逻辑流时使用。
 ---
 
-# UX 交互原型专家 (UX Prototyping)
+# UX 交互原型 (UX Prototyping)
 
 ## 概述
 
-此技能是将你的工程能力切换到**以用户为中心 (User-Centered)** 的设计模式。你的目标是通过极速构建**高保真交互、低保真视觉**的单文件原型，快速验证产品逻辑、信息架构和用户路径，从而在进入生产编码前降低“需求走样”的风险。
+本技能以“快速验证逻辑与路径”为目标，要求输出中文友好、单文件可运行的原型，并确保交互可被演示。
 
-**核心原则：**
-1.  **逻辑大于视觉 (Logic Over Visuals)**：优先确保“它是如何工作的”，而非“它看起来有多美”。使用标准的 Tailwind 灰度调色板来降低视觉干扰。
-2.  **内容真实性 (Real Content)**：严禁使用 `Lorem Ipsum`。所有按钮、标签和示例文本必须符合中文业务语境。
-3.  **零构建成本 (Zero Build Cost)**：强制使用 HTML5 + Tailwind CDN。严禁引入 React/Vue/Webpack 等需要编译环境的技术栈。
+**核心原则**
+1. **逻辑优先**：先验证路径，再谈视觉。
+2. **单文件交付**：一个 HTML 文件即完成。
+3. **中文友好**：禁止英文占位与 Lorem Ipsum。
+4. **轻构建**：禁止引入复杂构建工具。
 
 ## 何时使用
 
-- 用户提出“我想看看这个页面长什么样”或“展示一下交互流程”时。
-- 在实施复杂表单逻辑或多步跳转流程前，用于对齐认知。
-- 需要验证特定“国内用户习惯”（如：手机验证码登录、列表左滑操作）时。
-- **严禁使用于**：产出生产环境代码、性能测试、或构建复杂的前端 SPA 架构。
+- 需要快速验证交互流程。
+- 需要对齐业务逻辑与用户路径。
 
-## 核心法则
+## 强制流程 (Workflow)
 
-### 1. 必须执行“需求预检” (UX Pre-flight)
-在写 HTML 之前，**必须**先激活 `brainstorming` 并确认：
-- **核心角色 (Personas)**：谁在用这个原型？
-- **任务目标 (Task Goals)**：用户最终想达到的结果（如：成功下单）。
-- **Happy Path**：最顺畅的操作链路是什么？
-- **动作**：通过提问确认是否存在“返回”、“取消”或“异常报错”等分支路径。
+### 1. 需求澄清
+- 目标用户、核心任务、关键路径。
+- 必须包含成功与失败分支。
 
-### 2. 必须严守“单文件”输出规范 (Output Standard)
-产出的文件必须符合以下结构，严禁变体：
+### 2. 单文件模板 (强制)
 
 ```html
 <!DOCTYPE html>
-<html lang="zh-CN"> <!-- 强制中文 -->
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[原型名称]</title>
-    <!-- 强制使用 CDN，严禁本地 build -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: { extend: { colors: { primary: '#2563eb' } } }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[原型名称]</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --accent: #1f7a5c; --bg1: #f6f2e9; --bg2: #dce7e2; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
-    <!-- 必须使用语义化标签 -->
-    <main class="max-w-md mx-auto min-h-screen bg-white shadow-lg">
-        <!-- 业务内容 -->
-    </main>
-    <script>
-        // 必须模拟核心交互
-        // document.getElementById('btn').addEventListener(...)
-    </script>
+<body>
+  <main class="min-h-screen">
+    <!-- 中文文案 + 关键流程 -->
+  </main>
+  <script>
+    // 必须模拟关键交互（点击、提交、状态切换）
+  </script>
 </body>
 </html>
 ```
 
-### 3. 必须遵循“中文友好”设计规范
-- **字体栈**：优先使用 `font-sans` 并补齐 `PingFang SC`, `Microsoft YaHei`。
-- **文案语义**：使用“立即提交”而非“Submit”，使用“手机号格式错误”而非“Invalid Input”。
-- **操作反馈**：所有交互元素必须具备 `hover:`, `active:`, `disabled:` 状态。点击按钮后必须有显式反馈（如：弹窗、状态文字变化）。
+### 3. 视觉与交互约束
+- **字体**：使用非默认字体组合（如 `"Noto Serif SC"` + `"Source Sans 3"`），避免默认系统栈。
+- **背景**：必须包含渐变或纹理，不得使用纯色平铺。
+- **动效**：至少包含 1 个关键流程动画（页面加载或步骤切换）。
 
-### 4. 严禁“过度工程”与“视觉内耗”
-- **禁令**：严禁在原型中引入非必要的第三方库（如：Chart.js, AOS），除非它们是原型的核心验证点。
-- **禁令**：严禁在调整阴影透明度、圆角像素等视觉细节上消耗超过 2 分钟。
+## 禁令
+- 禁止 React/Vue/webpack 等构建工具。
+- 禁止英文占位文本。
+- 禁止无交互的纯静态页面。
 
 ## 借口粉碎机 (Excuse Smasher)
 
 | 借口 | 事实反击 |
 |------|----------|
-| “我用 React 写组件更快” | 原型是一次性的。单文件 HTML 可以直接在任何浏览器打开，无需安装 `node_modules`，具备最强的交付灵活性。 |
-| “用户没给具体文案，我先留空” | 作为 UX 专家，你应主动填充合理的行业文案供用户确认。留空会打断用户的逻辑思维。 |
-| “漂亮的 UI 能提升用户信心” | 过早的精美视觉会掩盖逻辑缺陷。如果逻辑不通，漂亮的 UI 只是“猪唇上的口红”。 |
+| “用 React 更快” | 原型的目标是验证逻辑，不是搭建工程。 |
+| “文案先留空” | 空文案无法验证真实用户路径。 |
+| “不用动效也可以” | 关键步骤无动效会削弱流程可理解性。 |
 
 ## 危险信号 (Red Flags)
 
-- **环境依赖**：产出的代码需要执行 `npm install` 才能运行。
-- **哑原型**：页面上只有静态文字，点击任何按钮都没有 DOM 变化或反馈。
-- **英文残留**：在中文原型中出现了 “User Login”、“Password” 等英文标签。
-- **代码弥散**：在一个 HTML 里混杂了大量无关的业务逻辑实现。
+- 需要 `npm install` 才能运行。
+- 页面仅有静态文字没有交互。
+- 中文场景出现大量英文残留。
