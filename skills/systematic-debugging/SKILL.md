@@ -1,4 +1,4 @@
-﻿---
+---
 name: systematic-debugging
 description: 当遇到 Bug、测试失败或非预期行为时，在提出修复方案前使用，以确保基于证据的科学排障。
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 name: writing-plans
 description: 当持有已批准的设计规格 (Spec)，并准备进入多步骤实施阶段前使用，用于产出可追踪的执行蓝图。
 ---

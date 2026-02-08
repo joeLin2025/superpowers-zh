@@ -1,4 +1,4 @@
-﻿---
+---
 name: verification-before-completion
 description: 在声称修复完成、功能交付或准备提交代码前使用，确立“证据优先”的验收基准。
 ---

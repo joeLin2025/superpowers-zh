@@ -1,4 +1,4 @@
-﻿---
+---
 name: requesting-code-review
 description: 当完成功能开发、修复 Bug 或准备合并分支时使用，以发起高质量的审查请求。
 ---

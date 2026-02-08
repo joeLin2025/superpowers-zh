@@ -1,4 +1,4 @@
-﻿---
+---
 name: receiving-code-review
 description: 当收到代码审查反馈时，在实施建议之前使用，以确保理性、客观地吸收反馈并改进代码。
 ---

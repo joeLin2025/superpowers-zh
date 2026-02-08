@@ -1,4 +1,4 @@
-﻿---
+---
 name: writing-skills
 description: 当需要创建新技能、重构现有技能或为特定工程挑战建立新的行为准则时使用。
 ---

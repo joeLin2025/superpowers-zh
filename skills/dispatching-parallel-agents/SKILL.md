@@ -1,4 +1,4 @@
-﻿---
+---
 name: dispatching-parallel-agents
 description: 当面临 2 个及以上可独立进行、无共享状态且无顺序依赖的任务时，用于调度多个并行智能体以提升执行效率。
 ---

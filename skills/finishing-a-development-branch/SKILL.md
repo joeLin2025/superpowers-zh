@@ -1,4 +1,4 @@
-﻿---
+---
 name: finishing-a-development-branch
 description: 当实施完成、所有测试通过，并且需要决定如何集成工作或准备发起 PR 时使用。
 ---

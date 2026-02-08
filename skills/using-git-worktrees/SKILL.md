@@ -1,4 +1,4 @@
-﻿---
+---
 name: using-git-worktrees
 description: 当需要在不干扰当前工作区的前提下，处理并发开发、紧急 Bug 修复或进行多版本基准对比时使用。
 ---

@@ -1,4 +1,4 @@
-﻿---
+---
 name: skill-localization-and-polishing
 description: 当需要创建、翻译或优化中文技能文档，且要求实现高信噪比、强约束力的专家级规范时使用。
 ---

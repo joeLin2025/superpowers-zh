@@ -1,4 +1,4 @@
-﻿---
+---
 name: executing-plans
 description: 当需要严格按书面计划分批执行任务，并确保每一步都经过验证与审查时使用。
 ---
