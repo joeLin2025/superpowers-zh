@@ -1,5 +1,6 @@
 import os
 import re
+import argparse
 
 def get_skills_info(skills_dir):
     skills = []
@@ -34,16 +35,39 @@ def generate_registry_markdown(skills):
         lines.append(f"- **`{name}`**: {desc}")
     return "\n".join(lines)
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate agent bootstrap with skill registry.")
+    parser.add_argument(
+        "--template",
+        default=None,
+        help="Path to bootstrap template (default: bootstrap/BOOTSTRAP.md).",
+    )
+    parser.add_argument(
+        "--agent-name",
+        default="Agent",
+        help="Agent name to inject into template.",
+    )
+    return parser.parse_args()
+
+
+def render_template(template_path, registry_md, agent_name):
+    with open(template_path, "r", encoding="utf-8") as f:
+        template = f.read()
+    content = template.replace("[SKILL_REGISTRY_PLACEHOLDER]", registry_md)
+    content = content.replace("[AGENT_NAME_PLACEHOLDER]", agent_name)
+    return content
+
+
 if __name__ == "__main__":
+    args = parse_args()
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     skills_dir = os.path.join(base_dir, "skills")
-    template_path = os.path.join(base_dir, "bootstrap", "GEMINI_BOOTSTRAP.md")
-    
+    default_template = os.path.join(base_dir, "bootstrap", "BOOTSTRAP.md")
+    template_path = args.template or default_template
+
     skills = get_skills_info(skills_dir)
     registry_md = generate_registry_markdown(skills)
-    
-    with open(template_path, 'r', encoding='utf-8') as f:
-        template = f.read()
-    
-    final_content = template.replace("[SKILL_REGISTRY_PLACEHOLDER]", registry_md)
-    print(final_content)
+
+    final_content = render_template(template_path, registry_md, args.agent_name)
+    with open(1, "w", encoding="utf-8") as out:
+        out.write(final_content)
