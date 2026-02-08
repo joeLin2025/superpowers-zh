@@ -30,8 +30,7 @@ description: 在开始任何对话、接收新指令或准备执行任务前使�
 - `收到审查 / 审查反馈` -> `receiving-code-review`
 - `Worktree / 工作区隔离 / 并行修复` -> `using-git-worktrees`
 - `完成 / 合并 / 验收 / 准备 PR` -> `verification-before-completion` 或 `finishing-a-development-branch`
-- `优化技能 / 编写规范 / 打磨` -> `skill-localization-and-polishing`
-- `新建技能 / 重构技能 / 编写技能` -> `writing-skills`
+- `新建技能 / 重构技能 / 编写技能 / 优化技能 / 编写规范 / 打磨 / 翻译技能 / 本地化` -> `skill-authoring`
 
 **混合意图处理优先级**
 1. 方法论技能优先：`brainstorming` / `systematic-debugging`
